@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健身 - 健身饮食App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eefdf8',
+                            100: '#d4f8ed',
+                            200: '#a9eddd',
+                            300: '#72ddc8',
+                            400: '#34D399', // 主色
+                            500: '#1cb881',
+                            600: '#10966b',
+                            700: '#107658',
+                            800: '#115e49',
+                            900: '#114d3d',
+                        },
+                        secondary: '#1F2937',
+                        light: '#F9FAFB',
+                        dark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        
+        .circle-progress {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .circle-progress svg {
+            transform: rotate(-90deg);
+        }
+        
+        .circle-progress circle {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+        
+        .circle-bg {
+            stroke: #f3f4f6;
+        }
+        
+        .circle-progress-value {
+            stroke: url(#gradient);
+            transition: stroke-dashoffset 1s;
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(120deg, #34D399, #3B82F6);
+        }
+        
+        .bg-gradient-purple {
+            background: linear-gradient(120deg, #8B5CF6, #EC4899);
+        }
+        
+        .bg-gradient-orange {
+            background: linear-gradient(120deg, #F59E0B, #EF4444);
+        }
+        
+        .bg-pattern {
+            background-color: #F9FAFB;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334D399' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* 3D Card Effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.3s;
+        }
+        
+        .card-3d:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+        }
+        
+        .card-3d-content {
+            transform: translateZ(20px);
+            transition: transform 0.3s;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="bg-pattern font-sans text-secondary">
+    <!-- 顶部导航 -->
+    <div class="bg-gradient-primary text-white pt-14 px-5 pb-5 rounded-b-3xl relative">
+        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute top-0 left-0 h-full w-full">
+                <path fill="#fff" fill-opacity="0.3" d="M0,224L30,218.7C60,213,120,203,180,170.7C240,139,300,85,360,74.7C420,64,480,96,540,122.7C600,149,660,171,720,165.3C780,160,840,128,900,117.3C960,107,1020,117,1080,138.7C1140,160,1200,192,1260,192C1320,192,1380,160,1410,144L1440,128L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z"></path>
+            </svg>
+        </div>
+        <div class="flex justify-between items-center relative z-10">
+            <div>
+                <h1 class="text-2xl font-bold">健身计划</h1>
+                <p class="text-white/80 text-sm mt-1">今日训练 · 全身强化</p>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
+                <i class="fas fa-dumbbell text-white text-lg"></i>
+            </div>
+        </div>
+        
+        <!-- 进度环 -->
+        <div class="mt-5 flex justify-center">
+            <div class="circle-progress">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#34D399" />
+                            <stop offset="100%" stop-color="#3B82F6" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="circle-bg" cx="40" cy="40" r="36" />
+                    <circle class="circle-progress-value" cx="40" cy="40" r="36" stroke-dasharray="226.08" stroke-dashoffset="96.98" /> <!-- 约57%完成 -->
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span class="text-xl font-bold text-white">57%</span>
+                    <span class="text-xs text-white/80">本周进度</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 每日训练记录 -->
+    <div class="px-5 mt-5">
+        <div class="glass-card rounded-2xl p-4 shadow-lg">
+            <h2 class="text-lg font-semibold mb-3">每周训练</h2>
+            <div class="flex justify-between">
+                <div class="flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
+                        <span class="text-xs">一</span>
+                    </div>
+                    <span class="text-xs text-primary-500">完成</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
+                        <span class="text-xs">二</span>
+                    </div>
+                    <span class="text-xs text-primary-500">完成</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
+                        <span class="text-xs">三</span>
+                    </div>
+                    <span class="text-xs text-primary-500">完成</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
+                        <span class="text-xs">四</span>
+                    </div>
+                    <span class="text-xs text-primary-500">完成</span>
+                </div>
+                <div class="flex flex-col items-center relative">
+                    <div class="w-11 h-11 rounded-full border-2 border-primary-400 bg-white flex items-center justify-center mb-1 shadow-lg animate-pulse-slow">
+                        <span class="text-xs text-primary-500 font-medium">五</span>
+                    </div>
+                    <div class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary-500 text-white text-xs flex items-center justify-center shadow-md">
+                        <i class="fas fa-star text-[10px]"></i>
+                    </div>
+                    <span class="text-xs text-primary-600 font-medium">今天</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-1">
+                        <span class="text-xs">六</span>
+                    </div>
+                    <span class="text-xs text-gray-500">休息</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-1">
+                        <span class="text-xs">日</span>
+                    </div>
+                    <span class="text-xs text-gray-500">休息</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 今日训练计划 -->
+    <div class="px-5 py-4">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">今日训练</h2>
+            <div class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
+                <i class="fas fa-calendar-day mr-1"></i>5月25日
+            </div>
+        </div>
+        <div class="space-y-4">
+            <!-- 训练项目1 -->
+            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
+                <div class="flex items-start p-4">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
+                        <i class="fas fa-running text-white text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold text-lg">热身有氧</h3>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                <span class="text-xs text-gray-500">10分钟</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">慢跑 10分钟</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-xs py-1 px-2 bg-primary-100 text-primary-600 rounded-full">简单</span>
+                            <div class="ml-auto flex items-center">
+                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
+                                <span class="text-xs text-gray-600">约 100 卡路里</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary-50 px-4 py-2 text-sm flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
+                        <span class="text-primary-700">适合初学者的有氧训练</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-primary-400"></i>
+                </div>
+            </div>
+            
+            <!-- 训练项目2 -->
+            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
+                <div class="flex items-start p-4">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-purple flex items-center justify-center flex-shrink-0 shadow-md">
+                        <i class="fas fa-dumbbell text-white text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold text-lg">胸肌训练</h3>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                <span class="text-xs text-gray-500">25分钟</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">俯卧撑 3x12 | 卧推 3x10</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full">中等</span>
+                            <div class="ml-auto flex items-center">
+                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
+                                <span class="text-xs text-gray-600">约 150 卡路里</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-purple-50 px-4 py-2 text-sm flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-purple-500 mr-2"></i>
+                        <span class="text-purple-700">专注于胸肌和肱三头肌</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-purple-400"></i>
+                </div>
+            </div>
+            
+            <!-- 训练项目3 -->
+            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
+                <div class="flex items-start p-4">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-orange flex items-center justify-center flex-shrink-0 shadow-md">
+                        <i class="fas fa-fire text-white text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold text-lg">腹肌训练</h3>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                <span class="text-xs text-gray-500">20分钟</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">卷腹 3x15 | 平板支撑 2x60秒</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-xs py-1 px-2 bg-red-100 text-red-600 rounded-full">困难</span>
+                            <div class="ml-auto flex items-center">
+                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
+                                <span class="text-xs text-gray-600">约 200 卡路里</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-orange-50 px-4 py-2 text-sm flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-orange-500 mr-2"></i>
+                        <span class="text-orange-700">增强核心肌群力量</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-orange-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 健身统计分析 -->
+    <div class="px-5 py-4 mb-28">
+        <h2 class="text-lg font-semibold text-secondary mb-4">数据统计</h2>
+        <div class="glass-card rounded-2xl overflow-hidden card-3d">
+            <div class="p-4 bg-gradient-to-r from-primary-400/10 to-transparent">
+                <div class="flex justify-between card-3d-content">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-secondary">12</h3>
+                        <p class="text-xs text-gray-500">本周训练 (小时)</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-secondary">1240</h3>
+                        <p class="text-xs text-gray-500">消耗 (卡路里)</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-secondary">18</h3>
+                        <p class="text-xs text-gray-500">完成 (动作)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 简单折线图 -->
+            <div class="px-4 pb-4 card-3d-content">
+                <div class="h-40 flex items-end space-x-1">
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 30%"></div>
+                        <span class="text-xs text-gray-500 mt-1">一</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 60%"></div>
+                        <span class="text-xs text-gray-500 mt-1">二</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 40%"></div>
+                        <span class="text-xs text-gray-500 mt-1">三</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 80%"></div>
+                        <span class="text-xs text-gray-500 mt-1">四</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1 relative">
+                        <div class="w-full relative bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 20%">
+                            <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 text-xs text-primary-500 font-bold bg-white px-2 py-1 rounded-full shadow-sm">
+                                今天
+                            </div>
+                        </div>
+                        <span class="text-xs text-gray-500 mt-1">五</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-full bg-gray-200 rounded-t-md transition-all duration-500" style="height: 10%"></div>
+                        <span class="text-xs text-gray-500 mt-1">六</span>
+                    </div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="w-full bg-gray-200 rounded-t-md transition-all duration-500" style="height: 10%"></div>
+                        <span class="text-xs text-gray-500 mt-1">日</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-5 left-1/2 transform -translate-x-1/2 glass-morphism rounded-full shadow-lg px-6 py-3 w-auto">
+        <div class="flex space-x-10 items-center">
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-home text-xl"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500 relative">
+                <div class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary-500"></div>
+                <i class="fas fa-dumbbell text-xl"></i>
+            </a>
+            <a href="ai-assistant.html" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
+                <i class="fas fa-comment-dots text-xl mt-3.5"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-utensils text-xl"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 模拟加载时的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const bars = document.querySelectorAll('.bg-gradient-primary');
+                bars.forEach(bar => {
+                    const height = bar.style.height;
+                    bar.style.height = '0%';
+                    setTimeout(() => {
+                        bar.style.height = height;
+                    }, 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html> 
