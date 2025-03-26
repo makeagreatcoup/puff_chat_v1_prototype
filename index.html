@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健身饮食App原型展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#34D399',
+                        secondary: '#1F2937',
+                        light: '#F9FAFB',
+                        dark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        .device-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            background-color: #fff;
+            border: 12px solid #111827;
+        }
+        
+        .ios-statusbar {
+            height: 44px;
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 40;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #111827;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-8 text-secondary">健身饮食App原型展示</h1>
+        
+        <div class="flex flex-wrap justify-center gap-10">
+            <!-- 首页设备 -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium mb-2 text-center text-secondary">首页</h3>
+                <div class="device-frame">
+                    <!-- iOS 状态栏 -->
+                    <div class="ios-statusbar">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 首页内容 -->
+                    <iframe src="pages/home.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- 健身模块设备 -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium mb-2 text-center text-secondary">健身</h3>
+                <div class="device-frame">
+                    <!-- iOS 状态栏 -->
+                    <div class="ios-statusbar">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 健身内容 -->
+                    <iframe src="pages/workout.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- 饮食模块设备 -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium mb-2 text-center text-secondary">饮食</h3>
+                <div class="device-frame">
+                    <!-- iOS 状态栏 -->
+                    <div class="ios-statusbar">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 饮食内容 -->
+                    <iframe src="pages/nutrition.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- AI助手模块设备 -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium mb-2 text-center text-secondary">AI助手</h3>
+                <div class="device-frame">
+                    <!-- iOS 状态栏 -->
+                    <div class="ios-statusbar">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- AI助手内容 -->
+                    <iframe src="pages/ai-assistant.html"></iframe>
+                </div>
+            </div>
+            
+            <!-- 个人中心模块设备 -->
+            <div class="mb-8">
+                <h3 class="text-lg font-medium mb-2 text-center text-secondary">个人中心</h3>
+                <div class="device-frame">
+                    <!-- iOS 状态栏 -->
+                    <div class="ios-statusbar">
+                        <span>9:41</span>
+                        <div class="flex space-x-1">
+                            <i class="fas fa-signal"></i>
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 个人中心内容 -->
+                    <iframe src="pages/profile.html"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-10 text-center text-gray-600">
+            <p>开发进度: 全部完成 - 首页、健身页面、饮食页面、AI助手页面、个人中心页面</p>
+            <p class="mt-2 text-primary">简约风格 | 健身饮食App | AI功能集成</p>
+        </div>
+    </div>
+</body>
+</html> 

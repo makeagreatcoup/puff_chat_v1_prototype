@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI聊天 - 健身饮食App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eefdf8',
+                            100: '#d4f8ed',
+                            200: '#a9eddd',
+                            300: '#72ddc8',
+                            400: '#34D399', // 主色
+                            500: '#1cb881',
+                            600: '#10966b',
+                            700: '#107658',
+                            800: '#115e49',
+                            900: '#114d3d',
+                        },
+                        secondary: '#1F2937',
+                        light: '#F9FAFB',
+                        dark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'slide-up': 'slideUp 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        shimmer: {
+                          '0%': { transform: 'translateX(-100%)' },
+                          '100%': { transform: 'translateX(100%)' }
+                        },
+                        slideUp: {
+                          '0%': { transform: 'translateY(100%)' },
+                          '100%': { transform: 'translateY(0)' }
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        
+        .glass-dark {
+            background: rgba(31, 41, 55, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(120deg, #34D399, #3B82F6);
+        }
+        
+        .bg-gradient-purple {
+            background: linear-gradient(120deg, #8B5CF6, #EC4899);
+        }
+        
+        .bg-gradient-orange {
+            background: linear-gradient(120deg, #F59E0B, #EF4444);
+        }
+        
+        .bg-gradient-blue {
+            background: linear-gradient(120deg, #2563EB, #7C3AED);
+        }
+        
+        .bg-pattern {
+            background-color: #F9FAFB;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334D399' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .hover-scale:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .typing-animation span {
+            display: inline-block;
+            animation: bounce 0.5s infinite alternate;
+            margin: 0 1px;
+        }
+        
+        .typing-animation span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-animation span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-4px); }
+        }
+        
+        .chat-window {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out forwards;
+        }
+        
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-pattern font-sans text-secondary">
+    <!-- 聊天窗口 -->
+    <div class="chat-window slide-up">
+        <!-- 顶部导航 -->
+        <div class="bg-gradient-blue text-white pt-14 px-5 pb-5 flex-shrink-0">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">AI聊天</h1>
+                    <p class="text-white/80 text-sm">健身教练 & 营养师</p>
+                </div>
+                <div class="flex space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shadow backdrop-blur-md">
+                        <i class="fas fa-times text-white text-lg"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 聊天对象选择器 -->
+            <div class="flex space-x-2 mt-4">
+                <button class="px-3 py-2 bg-white/20 backdrop-blur-md rounded-xl text-sm flex items-center space-x-2 text-white active">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>健身教练</span>
+                </button>
+                <button class="px-3 py-2 bg-white/10 backdrop-blur-md rounded-xl text-sm flex items-center space-x-2 text-white/70">
+                    <i class="fas fa-apple-alt"></i>
+                    <span>营养师</span>
+                </button>
+                <button class="px-3 py-2 bg-white/10 backdrop-blur-md rounded-xl text-sm flex items-center space-x-2 text-white/70">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>健康顾问</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 聊天记录区域 -->
+        <div class="flex-grow overflow-y-auto p-5 space-y-4">
+            <!-- AI健身教练消息 -->
+            <div class="flex space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-dumbbell text-white text-sm"></i>
+                </div>
+                <div class="bg-gray-100/80 rounded-2xl p-4 max-w-[80%] shadow-sm">
+                    <div class="flex items-center space-x-2 mb-1">
+                        <span class="font-semibold text-secondary">AI健身教练</span>
+                        <span class="text-xs text-primary-400 py-0.5 px-2 bg-primary-100 rounded-full">专业</span>
+                    </div>
+                    <p class="text-sm text-secondary">你好！我是你的AI健身教练。根据你的训练记录，我注意到你最近开始专注于上肢力量训练。需要我为你制定一个合适的训练计划吗？</p>
+                </div>
+            </div>
+            
+            <!-- 用户消息 -->
+            <div class="flex space-x-3 justify-end">
+                <div class="bg-gradient-primary rounded-2xl p-4 max-w-[80%] shadow-sm">
+                    <p class="text-sm text-white">是的，我想增强我的胸肌和手臂力量，但我每周只能训练3天。</p>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-user text-gray-500 text-sm"></i>
+                </div>
+            </div>
+            
+            <!-- AI健身教练消息 -->
+            <div class="flex space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-dumbbell text-white text-sm"></i>
+                </div>
+                <div class="bg-gray-100/80 rounded-2xl p-4 max-w-[80%] shadow-sm">
+                    <div class="flex items-center space-x-2 mb-1">
+                        <span class="font-semibold text-secondary">AI健身教练</span>
+                    </div>
+                    <p class="text-sm text-secondary">每周3天是很合理的训练频率。我建议你使用以下计划：</p>
+                    <ul class="text-sm text-secondary mt-2 space-y-1 ml-4 list-disc">
+                        <li>第1天：胸部和三头肌（推的动作）</li>
+                        <li>第2天：背部和二头肌（拉的动作）</li>
+                        <li>第3天：腿部和肩部</li>
+                    </ul>
+                    <p class="text-sm text-secondary mt-2">对于胸部训练，可以包括：卧推（3组x8-10次）、上斜卧推（3组x8-10次）和俯卧撑（3组至力竭）。每组间休息60-90秒。</p>
+                    <p class="text-sm text-secondary mt-2">你是初学者吗？或者已经有一些训练经验？</p>
+                </div>
+            </div>
+            
+            <!-- 用户消息 -->
+            <div class="flex space-x-3 justify-end">
+                <div class="bg-gradient-primary rounded-2xl p-4 max-w-[80%] shadow-sm">
+                    <p class="text-sm text-white">我有几个月的训练经验，但不太规律。你能给我一些建议，关于如何保持训练的连贯性吗？</p>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-user text-gray-500 text-sm"></i>
+                </div>
+            </div>
+            
+            <!-- AI营养师消息 -->
+            <div class="flex space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-orange flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-apple-alt text-white text-sm"></i>
+                </div>
+                <div class="bg-gray-100/80 rounded-2xl p-4 max-w-[80%] shadow-sm">
+                    <div class="flex items-center space-x-2 mb-1">
+                        <span class="font-semibold text-secondary">AI营养师</span>
+                    </div>
+                    <p class="text-sm text-secondary">我注意到你们在讨论训练计划。对于保持训练的连贯性，合理的饮食也很重要。确保在训练日摄入足够的蛋白质（体重每公斤1.6-2克），并在训练前30-60分钟摄入含有碳水化合物的食物提供能量。</p>
+                    <p class="text-sm text-secondary mt-2">你目前的饮食结构是怎样的？</p>
+                </div>
+            </div>
+            
+            <!-- AI健身教练消息 -->
+            <div class="flex space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-dumbbell text-white text-sm"></i>
+                </div>
+                <div class="bg-gray-100/80 rounded-2xl p-4 max-w-[80%] shadow-sm">
+                    <div class="flex items-center space-x-2 mb-1">
+                        <span class="font-semibold text-secondary">AI健身教练</span>
+                    </div>
+                    <p class="text-sm text-secondary">关于保持训练连贯性的建议：</p>
+                    <ul class="text-sm text-secondary mt-2 space-y-1 ml-4 list-disc">
+                        <li>设定具体的训练时间，并将其标记在日历上</li>
+                        <li>找一个训练伙伴互相督促</li>
+                        <li>制定短期目标（如4周能够增加卧推重量5kg）</li>
+                        <li>记录每次训练，追踪进度</li>
+                        <li>训练内容保持多样化，避免单调</li>
+                    </ul>
+                    <p class="text-sm text-secondary mt-2">从你的情况来看，最重要的是建立习惯，开始时可以设定较低的门槛，确保能坚持下来。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 输入区域 -->
+        <div class="flex-shrink-0 p-4 bg-white/80 backdrop-blur-md border-t border-gray-200">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-microphone text-gray-500"></i>
+                </div>
+                <input type="text" placeholder="输入你的问题..." class="flex-grow glass-morphism rounded-full py-3 px-4 text-sm text-secondary focus:outline-none focus:ring-2 focus:ring-primary-400/50 transition-all">
+                <div class="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow hover-scale">
+                    <i class="fas fa-paper-plane text-white"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟聊天窗口的显示隐藏
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatWindow = document.querySelector('.chat-window');
+            const closeButton = document.querySelector('.fa-times').parentNode;
+            
+            // 关闭按钮事件
+            closeButton.addEventListener('click', function() {
+                chatWindow.style.transform = 'translateY(100%)';
+                setTimeout(() => {
+                    window.history.back(); // 返回前一页
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html> 

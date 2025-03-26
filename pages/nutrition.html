@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>营养 - 健身饮食App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eefdf8',
+                            100: '#d4f8ed',
+                            200: '#a9eddd',
+                            300: '#72ddc8',
+                            400: '#34D399', // 主色
+                            500: '#1cb881',
+                            600: '#10966b',
+                            700: '#107658',
+                            800: '#115e49',
+                            900: '#114d3d',
+                        },
+                        secondary: '#1F2937',
+                        light: '#F9FAFB',
+                        dark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(120deg, #34D399, #3B82F6);
+        }
+        
+        .bg-gradient-purple {
+            background: linear-gradient(120deg, #8B5CF6, #EC4899);
+        }
+        
+        .bg-gradient-orange {
+            background: linear-gradient(120deg, #F59E0B, #EF4444);
+        }
+        
+        .bg-pattern {
+            background-color: #F9FAFB;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334D399' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .hover-scale:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 饼图样式 */
+        .donut-chart {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #34D399 0% 40%,
+                #3B82F6 40% 70%,
+                #F59E0B 70% 100%
+            );
+            position: relative;
+        }
+        
+        .donut-hole {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            background-color: white;
+            border-radius: 50%;
+            top: 20%;
+            left: 20%;
+        }
+        
+        .nutrition-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body class="bg-pattern font-sans text-secondary">
+    <!-- 顶部导航 -->
+    <div class="bg-gradient-orange text-white pt-14 px-5 pb-5 rounded-b-3xl relative">
+        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute top-0 left-0 h-full w-full">
+                <path fill="#fff" fill-opacity="0.3" d="M0,192L48,181.3C96,171,192,149,288,154.7C384,160,480,192,576,186.7C672,181,768,139,864,128C960,117,1056,139,1152,154.7C1248,171,1344,181,1392,186.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
+        <div class="flex justify-between items-center relative z-10">
+            <div>
+                <h1 class="text-2xl font-bold">营养饮食</h1>
+                <p class="text-white/80 text-sm mt-1">今日 · 5月25日</p>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
+                <i class="fas fa-utensils text-white text-lg"></i>
+            </div>
+        </div>
+        
+        <!-- 卡路里统计 -->
+        <div class="mt-5 flex justify-between">
+            <div class="glass-morphism rounded-xl px-4 py-3 w-[48%] flex items-center">
+                <div class="w-10 h-10 rounded-full bg-white/30 flex items-center justify-center mr-3">
+                    <i class="fas fa-fire-flame-curved text-white"></i>
+                </div>
+                <div>
+                    <p class="text-white/80 text-xs">已摄入</p>
+                    <div class="flex items-baseline">
+                        <span class="text-xl font-bold">1,450</span>
+                        <span class="text-white/80 text-xs ml-1">千卡</span>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-morphism rounded-xl px-4 py-3 w-[48%] flex items-center">
+                <div class="w-10 h-10 rounded-full bg-white/30 flex items-center justify-center mr-3">
+                    <i class="fas fa-bullseye text-white"></i>
+                </div>
+                <div>
+                    <p class="text-white/80 text-xs">目标</p>
+                    <div class="flex items-baseline">
+                        <span class="text-xl font-bold">2,100</span>
+                        <span class="text-white/80 text-xs ml-1">千卡</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 营养摄入比例 -->
+    <div class="px-5 mt-5">
+        <div class="glass-card rounded-2xl p-4 shadow-lg">
+            <h2 class="text-lg font-semibold mb-3">今日营养摄入</h2>
+            
+            <div class="flex items-center justify-between">
+                <div class="donut-chart relative">
+                    <div class="donut-hole flex flex-col items-center justify-center">
+                        <span class="text-2xl font-bold text-secondary">69%</span>
+                        <span class="text-xs text-gray-500">已完成</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full bg-primary-400 mr-2"></div>
+                        <span class="text-sm">蛋白质</span>
+                        <div class="ml-auto">
+                            <span class="text-sm font-medium">78g</span>
+                            <span class="text-xs text-gray-500 ml-1">/ 120g</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                        <span class="text-sm">碳水</span>
+                        <div class="ml-auto">
+                            <span class="text-sm font-medium">145g</span>
+                            <span class="text-xs text-gray-500 ml-1">/ 200g</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full bg-amber-500 mr-2"></div>
+                        <span class="text-sm">脂肪</span>
+                        <div class="ml-auto">
+                            <span class="text-sm font-medium">45g</span>
+                            <span class="text-xs text-gray-500 ml-1">/ 70g</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 今日餐饮记录 -->
+    <div class="px-5 py-4">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">今日餐饮</h2>
+            <button class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
+                <i class="fas fa-plus mr-1"></i>添加餐食
+            </button>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- 早餐 -->
+            <div class="glass-card rounded-2xl overflow-hidden hover-scale">
+                <div class="p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center">
+                            <div class="nutrition-icon bg-amber-100 text-amber-600 mr-3">
+                                <i class="fas fa-mug-hot"></i>
+                            </div>
+                            <h3 class="font-semibold">早餐</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">07:30</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-2">
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">卡路里</span>
+                            <span class="font-medium">420 kcal</span>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">蛋白质</span>
+                            <span class="font-medium">24g</span>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">碳水</span>
+                            <span class="font-medium">45g</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap">
+                        <div class="px-2 py-1 bg-amber-50 text-amber-700 rounded-md text-xs mr-2 mb-2">
+                            全麦面包
+                        </div>
+                        <div class="px-2 py-1 bg-amber-50 text-amber-700 rounded-md text-xs mr-2 mb-2">
+                            鸡蛋
+                        </div>
+                        <div class="px-2 py-1 bg-amber-50 text-amber-700 rounded-md text-xs mr-2 mb-2">
+                            牛奶
+                        </div>
+                        <div class="px-2 py-1 bg-amber-50 text-amber-700 rounded-md text-xs mb-2">
+                            蓝莓
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-amber-50 px-4 py-2 text-sm flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-clipboard-check text-amber-500 mr-2"></i>
+                        <span class="text-amber-700">营养评分：很好</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-amber-400"></i>
+                </div>
+            </div>
+            
+            <!-- 午餐 -->
+            <div class="glass-card rounded-2xl overflow-hidden hover-scale">
+                <div class="p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center">
+                            <div class="nutrition-icon bg-primary-100 text-primary-600 mr-3">
+                                <i class="fas fa-bowl-food"></i>
+                            </div>
+                            <h3 class="font-semibold">午餐</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">12:30</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-2">
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">卡路里</span>
+                            <span class="font-medium">650 kcal</span>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">蛋白质</span>
+                            <span class="font-medium">38g</span>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">碳水</span>
+                            <span class="font-medium">75g</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap">
+                        <div class="px-2 py-1 bg-green-50 text-green-700 rounded-md text-xs mr-2 mb-2">
+                            糙米饭
+                        </div>
+                        <div class="px-2 py-1 bg-green-50 text-green-700 rounded-md text-xs mr-2 mb-2">
+                            鸡胸肉
+                        </div>
+                        <div class="px-2 py-1 bg-green-50 text-green-700 rounded-md text-xs mr-2 mb-2">
+                            西兰花
+                        </div>
+                        <div class="px-2 py-1 bg-green-50 text-green-700 rounded-md text-xs mb-2">
+                            胡萝卜
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary-50 px-4 py-2 text-sm flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-clipboard-check text-primary-500 mr-2"></i>
+                        <span class="text-primary-700">营养评分：优秀</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-primary-400"></i>
+                </div>
+            </div>
+            
+            <!-- 晚餐 -->
+            <div class="glass-card rounded-2xl overflow-hidden hover-scale opacity-60 relative">
+                <div class="absolute inset-0 flex items-center justify-center z-10">
+                    <button class="px-4 py-2 bg-gradient-primary text-white rounded-full text-sm flex items-center">
+                        <i class="fas fa-plus mr-2"></i>
+                        添加晚餐
+                    </button>
+                </div>
+                <div class="blur-sm p-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center">
+                            <div class="nutrition-icon bg-purple-100 text-purple-600 mr-3">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <h3 class="font-semibold">晚餐</h3>
+                        </div>
+                        <span class="text-xs text-gray-500">18:30</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-2">
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">卡路里</span>
+                            <span class="font-medium">0 kcal</span>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">蛋白质</span>
+                            <span class="font-medium">0g</span>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-2 flex flex-col items-center">
+                            <span class="text-xs text-gray-500">碳水</span>
+                            <span class="font-medium">0g</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 水分摄入 -->
+    <div class="px-5 py-4 mb-28">
+        <h2 class="text-lg font-semibold mb-4">水分摄入</h2>
+        <div class="glass-card rounded-2xl p-4 hover-scale">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <p class="text-sm text-gray-500">今日目标</p>
+                    <p class="text-xl font-bold">2,500 ml</p>
+                </div>
+                <div class="w-16 h-16 relative">
+                    <svg viewBox="0 0 36 36" class="w-full h-full rotate-180 transform">
+                        <path d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#eee"
+                            stroke-width="3"
+                            stroke-dasharray="100, 100" />
+                        <path d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#3B82F6"
+                            stroke-width="3"
+                            stroke-dasharray="60, 100" />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center text-blue-500">
+                        <i class="fas fa-droplet"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mr-2">
+                        <i class="fas fa-glass-water text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium">已饮水量</p>
+                        <p class="text-xs text-gray-500">6杯 / 10杯</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2">
+                    <button class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center">
+                        <i class="fas fa-minus text-xs"></i>
+                    </button>
+                    <button class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center">
+                        <i class="fas fa-plus text-xs"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-4 grid grid-cols-10 gap-1">
+                <div class="h-8 bg-blue-500 rounded-md"></div>
+                <div class="h-8 bg-blue-500 rounded-md"></div>
+                <div class="h-8 bg-blue-500 rounded-md"></div>
+                <div class="h-8 bg-blue-500 rounded-md"></div>
+                <div class="h-8 bg-blue-500 rounded-md"></div>
+                <div class="h-8 bg-blue-500 rounded-md"></div>
+                <div class="h-8 bg-gray-200 rounded-md"></div>
+                <div class="h-8 bg-gray-200 rounded-md"></div>
+                <div class="h-8 bg-gray-200 rounded-md"></div>
+                <div class="h-8 bg-gray-200 rounded-md"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-5 left-1/2 transform -translate-x-1/2 glass-morphism rounded-full shadow-lg px-6 py-3 w-auto">
+        <div class="flex space-x-10 items-center">
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-home text-xl"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-dumbbell text-xl"></i>
+            </a>
+            <a href="ai-assistant.html" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
+                <i class="fas fa-comment-dots text-xl mt-3.5"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500 relative">
+                <div class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary-500"></div>
+                <i class="fas fa-utensils text-xl"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 模拟动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 水分摄入动画
+            const waterBlocks = document.querySelectorAll('.grid-cols-10 > div');
+            waterBlocks.forEach((block, index) => {
+                setTimeout(() => {
+                    if (index < 6) {
+                        block.classList.add('animate-pulse');
+                    }
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html> 

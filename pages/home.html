@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 健身饮食App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eefdf8',
+                            100: '#d4f8ed',
+                            200: '#a9eddd',
+                            300: '#72ddc8',
+                            400: '#34D399', // 主色
+                            500: '#1cb881',
+                            600: '#10966b',
+                            700: '#107658',
+                            800: '#115e49',
+                            900: '#114d3d',
+                        },
+                        secondary: '#1F2937',
+                        light: '#F9FAFB',
+                        dark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        shimmer: {
+                          '0%': { transform: 'translateX(-100%)' },
+                          '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        
+        .glass-dark {
+            background: rgba(31, 41, 55, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(120deg, #34D399, #3B82F6);
+        }
+        
+        .bg-gradient-purple {
+            background: linear-gradient(120deg, #8B5CF6, #EC4899);
+        }
+        
+        .bg-gradient-orange {
+            background: linear-gradient(120deg, #F59E0B, #EF4444);
+        }
+        
+        .bg-gradient-blue {
+            background: linear-gradient(120deg, #2563EB, #7C3AED);
+        }
+        
+        .bg-pattern {
+            background-color: #F9FAFB;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334D399' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .hover-scale:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 2s infinite;
+        }
+        
+        .circular-progress {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: conic-gradient(#34D399 0% var(--progress), #E5E7EB var(--progress) 100%);
+        }
+        
+        .circular-progress::before {
+            content: '';
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: white;
+        }
+        
+        .circular-progress span {
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+        
+        /* 波浪动画 */
+        .wave-animation {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2334D399' fill-opacity='0.3' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: 100% 100%;
+            animation: wave 8s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-pattern font-sans text-secondary">
+    <!-- 顶部导航 -->
+    <div class="bg-gradient-primary text-white pt-14 px-5 pb-5 rounded-b-3xl relative">
+        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute top-0 left-0 h-full w-full">
+                <path fill="#fff" fill-opacity="0.3" d="M0,128L40,122.7C80,117,160,107,240,122.7C320,139,400,181,480,181.3C560,181,640,139,720,117.3C800,96,880,96,960,117.3C1040,139,1120,181,1200,192C1280,203,1360,181,1400,170.7L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+            </svg>
+        </div>
+        <div class="flex justify-between items-center relative z-10">
+            <div class="flex items-center">
+                <div class="avatar-border mr-3">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1480&auto=format&fit=crop" alt="用户头像" class="w-10 h-10 rounded-full object-cover border-2 border-white">
+                </div>
+                <div>
+                    <p class="text-white/80 text-xs">欢迎回来</p>
+                    <h1 class="text-xl font-bold">陈健身</h1>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
+                    <i class="fas fa-bell text-white text-sm"></i>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
+                    <i class="fas fa-magnifying-glass text-white text-sm"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 数据概览 -->
+        <div class="px-5 mt-5">
+            <div class="flex space-x-3">
+                <div class="glass-morphism rounded-xl px-3 py-3 w-1/2 text-center">
+                    <div class="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center mx-auto mb-1">
+                        <i class="fas fa-fire-flame-curved text-white text-sm"></i>
+                    </div>
+                    <p class="text-white/80 text-xs">已消耗</p>
+                    <div class="text-lg font-bold">426</div>
+                    <p class="text-white/80 text-xs">千卡</p>
+                </div>
+                <div class="glass-morphism rounded-xl px-3 py-3 w-1/2 text-center">
+                    <div class="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center mx-auto mb-1">
+                        <i class="fas fa-dumbbell text-white text-sm"></i>
+                    </div>
+                    <p class="text-white/80 text-xs">已训练</p>
+                    <div class="text-lg font-bold">45</div>
+                    <p class="text-white/80 text-xs">分钟</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 快捷功能 -->
+    <div class="px-5 mt-5">
+        <div class="glass-card rounded-2xl p-4 shadow-lg">
+            <h2 class="text-lg font-semibold mb-4">快捷功能</h2>
+            
+            <div class="grid grid-cols-4 gap-3">
+                <a href="#" class="flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center mb-1 shadow-md text-white">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <span class="text-xs text-gray-700">开始训练</span>
+                </a>
+                <a href="#" class="flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-orange flex items-center justify-center mb-1 shadow-md text-white">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <span class="text-xs text-gray-700">记录饮食</span>
+                </a>
+                <a href="#" class="flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-blue flex items-center justify-center mb-1 shadow-md text-white">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <span class="text-xs text-gray-700">学习中心</span>
+                </a>
+                <a href="#" class="flex flex-col items-center">
+                    <div class="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center mb-1 shadow-md text-white">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <span class="text-xs text-gray-700">AI助手</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 今日计划 -->
+    <div class="px-5 mt-5">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">今日计划</h2>
+            <div class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
+                <i class="fas fa-calendar-day mr-1"></i>5月25日
+            </div>
+        </div>
+        
+        <div class="glass-card rounded-2xl p-4 hover-scale">
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary-400/15 flex items-center justify-center mr-3">
+                        <i class="fas fa-person-running text-primary-500"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">全身力量训练</h3>
+                        <p class="text-xs text-gray-500">15:30 - 16:45 · 75分钟</p>
+                    </div>
+                </div>
+                <div style="--progress: 65%" class="circular-progress">
+                    <span>65%</span>
+                </div>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full bg-primary-400 flex items-center justify-center text-white text-xs mr-2">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">10分钟热身</p>
+                    </div>
+                    <span class="text-xs text-primary-500">已完成</span>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full bg-primary-400 flex items-center justify-center text-white text-xs mr-2">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">胸肌训练 3×12</p>
+                    </div>
+                    <span class="text-xs text-primary-500">已完成</span>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full border-2 border-primary-400 flex items-center justify-center text-primary-500 text-xs mr-2">
+                        <span>3</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">腿部训练 4×10</p>
+                    </div>
+                    <span class="text-xs text-gray-500">进行中</span>
+                </div>
+                
+                <div class="flex items-center">
+                    <div class="w-6 h-6 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-400 text-xs mr-2">
+                        <span>4</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm text-gray-400">核心训练 3×15</p>
+                    </div>
+                    <span class="text-xs text-gray-400">待完成</span>
+                </div>
+            </div>
+            
+            <button class="w-full mt-4 bg-primary-400 text-white py-2 rounded-xl flex items-center justify-center">
+                <i class="fas fa-play-circle mr-2"></i>
+                继续训练
+            </button>
+        </div>
+    </div>
+
+    <!-- 营养摄入 -->
+    <div class="px-5 mt-5">
+        <h2 class="text-lg font-semibold mb-4">营养摄入</h2>
+        
+        <div class="glass-card rounded-2xl overflow-hidden hover-scale">
+            <div class="p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <p class="text-sm text-gray-500">今日卡路里</p>
+                        <div class="flex items-baseline">
+                            <span class="text-2xl font-bold">1,450</span>
+                            <span class="text-gray-500 text-xs ml-1">/ 2,100</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3">
+                        <div class="text-center">
+                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-1">
+                                <i class="fas fa-drumstick-bite text-sm"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">蛋白质</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mb-1">
+                                <i class="fas fa-bread-slice text-sm"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">碳水</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mb-1">
+                                <i class="fas fa-oil-can text-sm"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">脂肪</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="h-3 bg-gray-100 rounded-full overflow-hidden mb-3 wave-animation">
+                    <div class="h-full bg-primary-400 rounded-full" style="width: 69%"></div>
+                    <div class="wave"></div>
+                </div>
+                
+                <div class="flex space-x-2">
+                    <div class="flex-1 bg-gray-50 rounded-xl p-3 text-center relative overflow-hidden">
+                        <span class="text-xs text-gray-500">早餐</span>
+                        <p class="font-medium">420 kcal</p>
+                        <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 opacity-50">
+                            <i class="fas fa-mug-hot"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 bg-gray-50 rounded-xl p-3 text-center relative overflow-hidden">
+                        <span class="text-xs text-gray-500">午餐</span>
+                        <p class="font-medium">650 kcal</p>
+                        <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 opacity-50">
+                            <i class="fas fa-bowl-food"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1 bg-gray-50 rounded-xl p-3 text-center relative overflow-hidden opacity-60">
+                        <span class="text-xs text-gray-400">晚餐</span>
+                        <p class="font-medium text-gray-400">待记录</p>
+                        <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 opacity-30">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-primary-50 p-3 flex justify-between items-center">
+                <div class="flex items-center text-sm">
+                    <i class="fas fa-water text-blue-500 mr-2"></i>
+                    <span class="text-blue-700">水分摄入：6杯 / 10杯</span>
+                </div>
+                <i class="fas fa-chevron-right text-primary-400"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI健身教练 -->
+    <div class="px-5 py-5 mb-28">
+        <div class="glass-dark text-white rounded-2xl p-5 relative overflow-hidden shimmer hover-scale">
+            <div class="absolute top-0 right-0 w-24 h-24 opacity-20">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <path fill="#FFFFFF" d="M40.8,-70.7C51.9,-64.5,59.5,-51.9,65.6,-38.7C71.7,-25.5,76.5,-12.8,76.4,-0.1C76.3,12.6,71.3,25.1,64.1,36.5C56.9,47.8,47.5,58,35.8,64.8C24.1,71.6,10,75,-2.7,78.8C-15.5,82.6,-27.9,86.9,-38.7,82.6C-49.6,78.4,-58.9,65.5,-65.7,51.9C-72.5,38.3,-76.9,24,-78.7,9.1C-80.6,-5.8,-79.9,-21.4,-73.8,-34.2C-67.7,-47,-56.2,-57,-43.3,-62.8C-30.4,-68.6,-16.1,-70.2,-0.7,-69.1C14.8,-68,29.7,-76.9,40.8,-70.7Z" transform="translate(100 100)" />
+                </svg>
+            </div>
+            <div class="flex items-start mb-4">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <i class="fas fa-robot text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-semibold text-lg">AI健身教练</h3>
+                    <p class="text-sm text-white/70">智能训练建议与营养指导</p>
+                </div>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-3">
+                    <p class="text-sm">根据您今天的体能状态，建议专注于胸肌和核心训练，避免过度锻炼背部。</p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-3">
+                    <p class="text-sm">您的碳水摄入低于理想水平，建议晚餐增加适量的全谷物。</p>
+                </div>
+            </div>
+            
+            <div class="mt-4 flex justify-center">
+                <button class="px-4 py-2 bg-white text-secondary rounded-full text-sm">
+                    <i class="fas fa-message mr-2"></i>
+                    咨询AI助手
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="fixed bottom-5 left-1/2 transform -translate-x-1/2 glass-morphism rounded-full shadow-lg px-6 py-3 w-auto">
+        <div class="flex space-x-10 items-center">
+            <a href="#" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500 relative">
+                <div class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary-500"></div>
+                <i class="fas fa-home text-xl"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-dumbbell text-xl"></i>
+            </a>
+            <a href="ai-assistant.html" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
+                <i class="fas fa-comment-dots text-xl mt-3.5"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-utensils text-xl"></i>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 营养进度条动画
+            const nutritionBar = document.querySelector('.wave-animation .bg-primary-400');
+            nutritionBar.style.width = '0%';
+            
+            setTimeout(() => {
+                nutritionBar.style.width = '69%';
+            }, 500);
+        });
+    </script>
+</body>
+</html> 
