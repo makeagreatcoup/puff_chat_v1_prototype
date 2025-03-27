@@ -12,16 +12,16 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#eefdf8',
-                            100: '#d4f8ed',
-                            200: '#a9eddd',
-                            300: '#72ddc8',
-                            400: '#34D399', // 主色
-                            500: '#1cb881',
-                            600: '#10966b',
-                            700: '#107658',
-                            800: '#115e49',
-                            900: '#114d3d',
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8', // 主色(蓝色)
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
                         },
                         secondary: '#1F2937',
                         light: '#F9FAFB',
@@ -83,12 +83,12 @@
             background: linear-gradient(120deg, #34D399, #3B82F6);
         }
         
-        .bg-gradient-purple {
-            background: linear-gradient(120deg, #8B5CF6, #EC4899);
+        .bg-gradient-primary {
+            background: linear-gradient(120deg, #FB923C, #F97316);
         }
         
-        .bg-gradient-orange {
-            background: linear-gradient(120deg, #F59E0B, #EF4444);
+        .bg-gradient-secondary {
+            background: linear-gradient(120deg, #FB923C, #EA580C);
         }
         
         .bg-pattern {
@@ -150,7 +150,7 @@
                 <p class="text-white/80 text-sm mt-1">今日训练 · 全身强化</p>
             </div>
             <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
-                <i class="fas fa-dumbbell text-white text-lg"></i>
+                <i class="fas fa-dumbbell text-white text-lg" style="color: #2563EB"></i>
             </div>
         </div>
         
@@ -160,12 +160,12 @@
                 <svg width="80" height="80" viewBox="0 0 80 80">
                     <defs>
                         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#34D399" />
-                            <stop offset="100%" stop-color="#3B82F6" />
+                            <stop offset="0%" stop-color="#2563EB" />
+                            <stop offset="100%" stop-color="#7C3AED" />
                         </linearGradient>
                     </defs>
-                    <circle class="circle-bg" cx="40" cy="40" r="36" />
-                    <circle class="circle-progress-value" cx="40" cy="40" r="36" stroke-dasharray="226.08" stroke-dashoffset="96.98" /> <!-- 约57%完成 -->
+                    <circle class="circle-bg" cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.2)" />
+                    <circle class="circle-progress-value" cx="40" cy="40" r="36" stroke-dasharray="226.08" stroke-dashoffset="96.98" stroke="url(#gradient)" /> <!-- 约57%完成 -->
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center">
                     <span class="text-xl font-bold text-white">57%</span>

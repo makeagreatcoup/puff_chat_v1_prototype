@@ -12,16 +12,16 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#eefdf8',
-                            100: '#d4f8ed',
-                            200: '#a9eddd',
-                            300: '#72ddc8',
-                            400: '#34D399', // 主色
-                            500: '#1cb881',
-                            600: '#10966b',
-                            700: '#107658',
-                            800: '#115e49',
-                            900: '#114d3d',
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8', // 主色(蓝色)
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
                         },
                         secondary: '#1F2937',
                         light: '#F9FAFB',
@@ -133,7 +133,7 @@
     <div class="bg-gradient-orange text-white pt-14 px-5 pb-5 rounded-b-3xl relative">
         <div class="absolute top-0 left-0 w-full h-full opacity-20">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute top-0 left-0 h-full w-full">
-                <path fill="#fff" fill-opacity="0.3" d="M0,192L48,181.3C96,171,192,149,288,154.7C384,160,480,192,576,186.7C672,181,768,139,864,128C960,117,1056,139,1152,154.7C1248,171,1344,181,1392,186.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+                <path fill="#F59E0B" fill-opacity="0.3" d="M0,192L48,181.3C96,171,192,149,288,154.7C384,160,480,192,576,186.7C672,181,768,139,864,128C960,117,1056,139,1152,154.7C1248,171,1344,181,1392,186.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
             </svg>
         </div>
         <div class="flex justify-between items-center relative z-10">
@@ -220,8 +220,10 @@
         </div>
     </div>
 
-    <!-- 今日餐饮记录 -->
-    <div class="px-5 py-4">
+    <!-- 主内容容器 -->
+    <div class="pb-20">
+        <!-- 今日餐饮记录 -->
+        <div class="px-5 py-4">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold">今日餐饮</h2>
             <button class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
@@ -373,7 +375,7 @@
     </div>
 
     <!-- 水分摄入 -->
-    <div class="px-5 py-4 mb-28">
+    <div class="px-5 py-4 mb-16">
         <h2 class="text-lg font-semibold mb-4">水分摄入</h2>
         <div class="glass-card rounded-2xl p-4 hover-scale">
             <div class="flex justify-between items-center mb-4">

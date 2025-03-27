@@ -12,16 +12,16 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#eefdf8',
-                            100: '#d4f8ed',
-                            200: '#a9eddd',
-                            300: '#72ddc8',
-                            400: '#34D399', // 主色
-                            500: '#1cb881',
-                            600: '#10966b',
-                            700: '#107658',
-                            800: '#115e49',
-                            900: '#114d3d',
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8', // 主色(蓝色)
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
                         },
                         secondary: '#1F2937',
                         light: '#F9FAFB',
@@ -77,15 +77,15 @@
         }
         
         .bg-gradient-purple {
-            background: linear-gradient(120deg, #8B5CF6, #EC4899);
+            background: linear-gradient(120deg, #3B82F6, #34D399);
         }
         
         .bg-gradient-orange {
-            background: linear-gradient(120deg, #F59E0B, #EF4444);
+            background: linear-gradient(120deg, #3B82F6, #34D399);
         }
         
         .bg-gradient-blue {
-            background: linear-gradient(120deg, #2563EB, #7C3AED);
+            background: linear-gradient(120deg, #34D399, #3B82F6);
         }
         
         .bg-pattern {
@@ -226,17 +226,17 @@
                     <div class="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center mx-auto mb-1">
                         <i class="fas fa-fire-flame-curved text-white text-sm"></i>
                     </div>
-                    <p class="text-white/80 text-xs">已消耗</p>
-                    <div class="text-lg font-bold">426</div>
-                    <p class="text-white/80 text-xs">千卡</p>
+                    <p class="text-secondary/80 text-xs">已消耗</p>
+                    <div class="text-lg font-bold text-secondary">426</div>
+                    <p class="text-secondary/80 text-xs">千卡</p>
                 </div>
                 <div class="glass-morphism rounded-xl px-3 py-3 w-1/2 text-center">
                     <div class="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center mx-auto mb-1">
                         <i class="fas fa-dumbbell text-white text-sm"></i>
                     </div>
-                    <p class="text-white/80 text-xs">已训练</p>
-                    <div class="text-lg font-bold">45</div>
-                    <p class="text-white/80 text-xs">分钟</p>
+                    <p class="text-secondary/80 text-xs">已训练</p>
+                    <div class="text-lg font-bold text-secondary">45</div>
+                    <p class="text-secondary/80 text-xs">分钟</p>
                 </div>
             </div>
         </div>
@@ -252,26 +252,27 @@
                     <div class="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center mb-1 shadow-md text-white">
                         <i class="fas fa-dumbbell"></i>
                     </div>
-                    <span class="text-xs text-gray-700">开始训练</span>
+                    <span class="text-xs text-gray-700">训练计划</span>
                 </a>
                 <a href="#" class="flex flex-col items-center">
                     <div class="w-12 h-12 rounded-full bg-gradient-orange flex items-center justify-center mb-1 shadow-md text-white">
                         <i class="fas fa-utensils"></i>
                     </div>
-                    <span class="text-xs text-gray-700">记录饮食</span>
+                    <span class="text-xs text-gray-700">饮食记录</span>
                 </a>
                 <a href="#" class="flex flex-col items-center">
                     <div class="w-12 h-12 rounded-full bg-gradient-blue flex items-center justify-center mb-1 shadow-md text-white">
-                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <span class="text-xs text-gray-700">学习中心</span>
+                    <span class="text-xs text-gray-700">数据查看</span>
                 </a>
                 <a href="#" class="flex flex-col items-center">
-                    <div class="w-12 h-12 rounded-full bg-gradient-purple flex items-center justify-center mb-1 shadow-md text-white">
-                        <i class="fas fa-robot"></i>
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-1 shadow-md text-white animate-pulse">
+                        <i class="fas fa-glass-water"></i>
                     </div>
-                    <span class="text-xs text-gray-700">AI助手</span>
+                    <span class="text-xs text-gray-700">喝了一杯</span>
                 </a>
+
             </div>
         </div>
     </div>
@@ -425,43 +426,16 @@
         </div>
     </div>
 
-    <!-- AI健身教练 -->
-    <div class="px-5 py-5 mb-28">
-        <div class="glass-dark text-white rounded-2xl p-5 relative overflow-hidden shimmer hover-scale">
-            <div class="absolute top-0 right-0 w-24 h-24 opacity-20">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                    <path fill="#FFFFFF" d="M40.8,-70.7C51.9,-64.5,59.5,-51.9,65.6,-38.7C71.7,-25.5,76.5,-12.8,76.4,-0.1C76.3,12.6,71.3,25.1,64.1,36.5C56.9,47.8,47.5,58,35.8,64.8C24.1,71.6,10,75,-2.7,78.8C-15.5,82.6,-27.9,86.9,-38.7,82.6C-49.6,78.4,-58.9,65.5,-65.7,51.9C-72.5,38.3,-76.9,24,-78.7,9.1C-80.6,-5.8,-79.9,-21.4,-73.8,-34.2C-67.7,-47,-56.2,-57,-43.3,-62.8C-30.4,-68.6,-16.1,-70.2,-0.7,-69.1C14.8,-68,29.7,-76.9,40.8,-70.7Z" transform="translate(100 100)" />
-                </svg>
-            </div>
-            <div class="flex items-start mb-4">
-                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mr-3 shadow-lg">
-                    <i class="fas fa-robot text-xl"></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-semibold text-lg">AI健身教练</h3>
-                    <p class="text-sm text-white/70">智能训练建议与营养指导</p>
-                </div>
-            </div>
-            
-            <div class="space-y-3">
-                <div class="bg-white/10 backdrop-blur-md rounded-xl p-3">
-                    <p class="text-sm">根据您今天的体能状态，建议专注于胸肌和核心训练，避免过度锻炼背部。</p>
-                </div>
-                
-                <div class="bg-white/10 backdrop-blur-md rounded-xl p-3">
-                    <p class="text-sm">您的碳水摄入低于理想水平，建议晚餐增加适量的全谷物。</p>
-                </div>
-            </div>
-            
-            <div class="mt-4 flex justify-center">
-                <button class="px-4 py-2 bg-white text-secondary rounded-full text-sm">
-                    <i class="fas fa-message mr-2"></i>
-                    咨询AI助手
-                </button>
+
             </div>
         </div>
     </div>
 
+    <!-- 主内容容器 -->
+    <div class="pb-28">
+        <!-- 原有内容保持不变 -->
+    </div>
+    
     <!-- 底部导航栏 -->
     <div class="fixed bottom-5 left-1/2 transform -translate-x-1/2 glass-morphism rounded-full shadow-lg px-6 py-3 w-auto">
         <div class="flex space-x-10 items-center">
