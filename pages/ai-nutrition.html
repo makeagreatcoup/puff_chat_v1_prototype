@@ -126,7 +126,7 @@
                     <div class="w-20 h-20 rounded-full bg-gradient-primary flex items-center justify-center shadow-lg mb-4">
                         <i class="fas fa-microphone text-white text-2xl"></i>
                     </div>
-                    <p class="text-gray-500 text-sm mb-4">点击开始录音，描述你的饮食需求</p>
+                    <p class="text-gray-500 text-sm mb-4">点击开始录音，描述你吃的食物</p>
                     <button class="px-6 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
                         开始录音
                     </button>
@@ -134,28 +134,34 @@
 
                 <!-- 文字输入区域（默认隐藏） -->
                 <div class="hidden">
-                    <div class="flex items-center space-x-2">
-                        <input type="text" placeholder="输入饮食需求..." class="flex-1 glass-morphism rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400/50">
-                        <button class="px-4 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
-                            发送
+                    <div class="flex flex-col space-y-3">
+                        <input type="text" placeholder="输入食物名称和数量，例如：全麦面包 2片" class="glass-morphism rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400/50">
+                        <div class="flex items-center space-x-2">
+                            <input type="text" placeholder="添加更多食物..." class="flex-1 glass-morphism rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400/50">
+                            <button class="px-4 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <button class="w-full px-4 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
+                            确认记录
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 饮食建议卡片 -->
+        <!-- 饮食记录卡片 -->
         <div class="px-5 mt-5">
             <div class="glass-card rounded-2xl overflow-hidden">
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold">今日饮食建议</h2>
+                        <h2 class="text-lg font-semibold">今日饮食</h2>
                         <div class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
-                            <i class="fas fa-clock mr-1"></i>刚刚生成
+                            <i class="fas fa-calendar-day mr-1"></i>5月25日
                         </div>
                     </div>
                     
-                    <!-- 早餐卡片 -->
+                    <!-- 早餐 -->
                     <div class="glass-card rounded-xl p-4 mb-4">
                         <div class="flex items-start">
                             <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
@@ -165,8 +171,8 @@
                                 <div class="flex justify-between">
                                     <h3 class="font-semibold text-lg">早餐</h3>
                                     <div class="flex items-center">
-                                        <i class="fas fa-fire text-orange-400 mr-1 text-xs"></i>
-                                        <span class="text-xs text-gray-500">约 450 kcal</span>
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="text-xs text-gray-500">07:30</span>
                                     </div>
                                 </div>
                                 <p class="text-sm text-gray-500 mt-1">全麦面包 2片 | 鸡蛋 2个 | 牛奶 250ml</p>
@@ -179,7 +185,7 @@
                         </div>
                     </div>
 
-                    <!-- 午餐卡片 -->
+                    <!-- 午餐 -->
                     <div class="glass-card rounded-xl p-4 mb-4">
                         <div class="flex items-start">
                             <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
@@ -189,8 +195,8 @@
                                 <div class="flex justify-between">
                                     <h3 class="font-semibold text-lg">午餐</h3>
                                     <div class="flex items-center">
-                                        <i class="fas fa-fire text-orange-400 mr-1 text-xs"></i>
-                                        <span class="text-xs text-gray-500">约 650 kcal</span>
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="text-xs text-gray-500">12:30</span>
                                     </div>
                                 </div>
                                 <p class="text-sm text-gray-500 mt-1">糙米饭 1碗 | 鸡胸肉 150g | 西兰花 200g</p>
@@ -203,7 +209,7 @@
                         </div>
                     </div>
 
-                    <!-- 晚餐卡片 -->
+                    <!-- 晚餐 -->
                     <div class="glass-card rounded-xl p-4">
                         <div class="flex items-start">
                             <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
@@ -213,8 +219,8 @@
                                 <div class="flex justify-between">
                                     <h3 class="font-semibold text-lg">晚餐</h3>
                                     <div class="flex items-center">
-                                        <i class="fas fa-fire text-orange-400 mr-1 text-xs"></i>
-                                        <span class="text-xs text-gray-500">约 550 kcal</span>
+                                        <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                        <span class="text-xs text-gray-500">18:30</span>
                                     </div>
                                 </div>
                                 <p class="text-sm text-gray-500 mt-1">三文鱼 150g | 藜麦 100g | 芦笋 150g</p>
@@ -230,10 +236,10 @@
                     <!-- 操作按钮 -->
                     <div class="flex justify-between mt-4">
                         <button class="flex-1 mr-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-edit mr-2"></i>修改建议
+                            <i class="fas fa-edit mr-2"></i>修改记录
                         </button>
                         <button class="flex-1 ml-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors">
-                            <i class="fas fa-check mr-2"></i>确认添加
+                            <i class="fas fa-check mr-2"></i>确认记录
                         </button>
                     </div>
                 </div>

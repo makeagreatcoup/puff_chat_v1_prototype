@@ -237,9 +237,9 @@
     <!-- 今日训练计划 -->
     <div class="px-5 py-4">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold">今日训练</h2>
+            <h2 class="text-lg font-semibold">训练计划</h2>
             <div class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
-                <i class="fas fa-calendar-day mr-1"></i>5月25日
+                <i class="fas fa-calendar-week mr-1"></i>本周计划
             </div>
         </div>
         <div class="space-y-4">
@@ -247,39 +247,6 @@
             <div class="glass-card rounded-2xl hover-scale overflow-hidden">
                 <div class="flex items-start p-4">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
-                        <i class="fas fa-running text-white text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <div class="flex justify-between">
-                            <h3 class="font-semibold text-lg">热身有氧</h3>
-                            <div class="flex items-center">
-                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
-                                <span class="text-xs text-gray-500">10分钟</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1">慢跑 10分钟</p>
-                        <div class="flex items-center mt-2">
-                            <span class="text-xs py-1 px-2 bg-primary-100 text-primary-600 rounded-full">简单</span>
-                            <div class="ml-auto flex items-center">
-                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
-                                <span class="text-xs text-gray-600">约 100 kcal</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-primary-50 px-4 py-2 text-sm flex justify-between items-center">
-                    <div class="flex items-center">
-                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
-                        <span class="text-primary-700">适合初学者的有氧训练</span>
-                    </div>
-                    <i class="fas fa-chevron-right text-primary-400"></i>
-                </div>
-            </div>
-            
-            <!-- 训练项目2 -->
-            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
-                <div class="flex items-start p-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-purple flex items-center justify-center flex-shrink-0 shadow-md">
                         <i class="fas fa-dumbbell text-white text-xl"></i>
                     </div>
                     <div class="ml-4 flex-grow">
@@ -287,58 +254,151 @@
                             <h3 class="font-semibold text-lg">胸肌训练</h3>
                             <div class="flex items-center">
                                 <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
-                                <span class="text-xs text-gray-500">25分钟</span>
+                                <span class="text-xs text-gray-500">45分钟</span>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-500 mt-1">俯卧撑 3x12 | 卧推 3x10</p>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">俯卧撑</span>
+                                <span class="text-xs text-gray-500">3组 × 12次</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">卧推</span>
+                                <span class="text-xs text-gray-500">3组 × 10次</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">飞鸟</span>
+                                <span class="text-xs text-gray-500">3组 × 12次</span>
+                            </div>
+                        </div>
                         <div class="flex items-center mt-2">
-                            <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full">中等</span>
+                            <span class="text-xs py-1 px-2 bg-primary-100 text-primary-600 rounded-full">中等</span>
                             <div class="ml-auto flex items-center">
                                 <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
                                 <span class="text-xs text-gray-600">约 150 kcal</span>
                             </div>
                         </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-500 mb-2">训练日期：</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">周一</span>
+                                <span class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">周四</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-purple-50 px-4 py-2 text-sm flex justify-between items-center">
+                <div class="bg-primary-50 px-4 py-2 text-sm flex justify-between items-center">
                     <div class="flex items-center">
-                        <i class="fas fa-info-circle text-purple-500 mr-2"></i>
-                        <span class="text-purple-700">专注于胸肌和肱三头肌</span>
+                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
+                        <span class="text-primary-700">胸肌力量训练</span>
                     </div>
-                    <i class="fas fa-chevron-right text-purple-400"></i>
+                    <i class="fas fa-chevron-right text-primary-400"></i>
+                </div>
+            </div>
+            
+            <!-- 训练项目2 -->
+            <div class="glass-card rounded-2xl hover-scale overflow-hidden mt-4">
+                <div class="flex items-start p-4">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
+                        <i class="fas fa-dumbbell text-white text-xl"></i>
+                    </div>
+                    <div class="ml-4 flex-grow">
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold text-lg">背部训练</h3>
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                <span class="text-xs text-gray-500">45分钟</span>
+                            </div>
+                        </div>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">划船</span>
+                                <span class="text-xs text-gray-500">3组 × 12次</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">引体向上</span>
+                                <span class="text-xs text-gray-500">3组 × 8次</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">硬拉</span>
+                                <span class="text-xs text-gray-500">3组 × 10次</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center mt-2">
+                            <span class="text-xs py-1 px-2 bg-primary-100 text-primary-600 rounded-full">中等</span>
+                            <div class="ml-auto flex items-center">
+                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
+                                <span class="text-xs text-gray-600">约 150 kcal</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-500 mb-2">训练日期：</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">周二</span>
+                                <span class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">周五</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary-50 px-4 py-2 text-sm flex justify-between items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
+                        <span class="text-primary-700">背部力量训练</span>
+                    </div>
+                    <i class="fas fa-chevron-right text-primary-400"></i>
                 </div>
             </div>
             
             <!-- 训练项目3 -->
-            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
+            <div class="glass-card rounded-2xl hover-scale overflow-hidden mt-4">
                 <div class="flex items-start p-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-orange flex items-center justify-center flex-shrink-0 shadow-md">
-                        <i class="fas fa-fire text-white text-xl"></i>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
+                        <i class="fas fa-dumbbell text-white text-xl"></i>
                     </div>
                     <div class="ml-4 flex-grow">
                         <div class="flex justify-between">
-                            <h3 class="font-semibold text-lg">腹肌训练</h3>
+                            <h3 class="font-semibold text-lg">腿部训练</h3>
                             <div class="flex items-center">
                                 <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
-                                <span class="text-xs text-gray-500">20分钟</span>
+                                <span class="text-xs text-gray-500">45分钟</span>
                             </div>
                         </div>
-                        <p class="text-sm text-gray-500 mt-1">卷腹 3x15 | 平板支撑 2x60秒</p>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">深蹲</span>
+                                <span class="text-xs text-gray-500">3组 × 15次</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">弓步走</span>
+                                <span class="text-xs text-gray-500">3组 × 20步</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">小腿提升</span>
+                                <span class="text-xs text-gray-500">3组 × 20次</span>
+                            </div>
+                        </div>
                         <div class="flex items-center mt-2">
-                            <span class="text-xs py-1 px-2 bg-red-100 text-red-600 rounded-full">困难</span>
+                            <span class="text-xs py-1 px-2 bg-primary-100 text-primary-600 rounded-full">中等</span>
                             <div class="ml-auto flex items-center">
                                 <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
-                                <span class="text-xs text-gray-600">约 200 kcal</span>
+                                <span class="text-xs text-gray-600">约 150 kcal</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-500 mb-2">训练日期：</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">周三</span>
+                                <span class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">周六</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-orange-50 px-4 py-2 text-sm flex justify-between items-center">
+                <div class="bg-primary-50 px-4 py-2 text-sm flex justify-between items-center">
                     <div class="flex items-center">
-                        <i class="fas fa-info-circle text-orange-500 mr-2"></i>
-                        <span class="text-orange-700">增强核心肌群力量</span>
+                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
+                        <span class="text-primary-700">腿部力量训练</span>
                     </div>
-                    <i class="fas fa-chevron-right text-orange-400"></i>
+                    <i class="fas fa-chevron-right text-primary-400"></i>
                 </div>
             </div>
         </div>
