@@ -126,6 +126,34 @@
             overflow-y: auto;
             overflow-x: hidden;
         }
+        
+        /* AI助手弹出样式 */
+        .ai-assistant-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F9FAFB;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+            overflow-y: auto;
+        }
+        
+        .ai-assistant-container.active {
+            transform: translateY(0);
+        }
+        
+        /* 优化AI助手按钮样式 */
+        #ai-assistant-toggle {
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        #ai-assistant-toggle:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="bg-pattern font-sans text-secondary">
@@ -139,10 +167,14 @@
         <div class="flex justify-between items-center relative z-10">
             <div>
                 <h1 class="text-2xl font-bold">营养饮食</h1>
-                <p class="text-white/80 text-base mt-1">今日 · 5月25日</p>
+                <p class="text-white/80 text-base mt-1">均衡营养 · 健康生活</p>
             </div>
-            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
-                <i class="fas fa-utensils text-white text-lg"></i>
+            <div class="flex items-center">
+                <div id="ai-assistant-toggle" class="relative cursor-pointer">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg backdrop-blur-md">
+                        <i class="fas fa-robot text-white text-lg"></i>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -452,10 +484,7 @@
             <a href="workout.html" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
                 <i class="fas fa-dumbbell text-xl"></i>
             </a>
-            <a href="ai-assistant.html" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
-                <i class="fas fa-robot text-xl mt-3.5"></i>
-            </a>
-            <a href="#" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500">
+            <a href="nutrition.html" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500">
                 <i class="fas fa-utensils text-xl"></i>
             </a>
             <a href="profile.html" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
@@ -463,34 +492,189 @@
             </a>
         </div>
     </div>
+    
+    <!-- AI饮食助手容器 -->
+    <div class="ai-assistant-container" id="ai-assistant-container">
+        <!-- 顶部导航 -->
+        <div class="bg-gradient-primary text-white pt-14 px-5 pb-5 rounded-b-3xl relative">
+            <div class="absolute top-0 left-0 w-full h-full opacity-20">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute top-0 left-0 h-full w-full">
+                    <path fill="#fff" fill-opacity="0.3" d="M0,192L48,181.3C96,171,192,149,288,154.7C384,160,480,192,576,186.7C672,181,768,139,864,128C960,117,1056,139,1152,154.7C1248,171,1344,181,1392,186.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+                </svg>
+            </div>
+            <div class="flex justify-between items-center relative z-10">
+                <div>
+                    <h1 class="text-2xl font-bold">饮食助手</h1>
+                    <p class="text-white/80 text-base mt-1">语音交互 · 智能建议</p>
+                </div>
+                <div id="ai-assistant-close" class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md cursor-pointer">
+                    <i class="fas fa-times text-white text-lg"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主内容容器 -->
+        <div class="pb-20">
+            <!-- 输入区域 -->
+            <div class="px-5">
+                <div class="glass-card rounded-2xl p-4">
+                    <!-- 标签切换 -->
+                    <div class="flex space-x-2 mb-4">
+                        <button class="flex-1 px-4 py-2 bg-primary-500 text-white rounded-full text-sm">
+                            <i class="fas fa-microphone mr-2"></i>语音输入
+                        </button>
+                        <button class="flex-1 px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-keyboard mr-2"></i>文字输入
+                        </button>
+                    </div>
+
+                    <!-- 语音输入区域 -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 rounded-full bg-gradient-primary flex items-center justify-center shadow-lg mb-4">
+                            <i class="fas fa-microphone text-white text-2xl"></i>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">点击开始录音，描述你吃的食物</p>
+                        <button class="px-6 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
+                            开始录音
+                        </button>
+                    </div>
+
+                    <!-- 文字输入区域（默认隐藏） -->
+                    <div class="hidden">
+                        <div class="flex flex-col space-y-3">
+                            <input type="text" placeholder="输入食物名称和数量，例如：全麦面包 2片" class="glass-morphism rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400/50">
+                            <div class="flex items-center space-x-2">
+                                <input type="text" placeholder="添加更多食物..." class="flex-1 glass-morphism rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400/50">
+                                <button class="px-4 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <button class="w-full px-4 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
+                                确认记录
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 饮食记录卡片 -->
+            <div class="px-5 mt-5">
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold">今日饮食</h2>
+                            <div class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
+                                <i class="fas fa-calendar-day mr-1"></i>今日
+                            </div>
+                        </div>
+                        
+                        <!-- 早餐 -->
+                        <div class="glass-card rounded-xl p-4 mb-4">
+                            <div class="flex items-start">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
+                                    <i class="fas fa-sun text-white text-xl"></i>
+                                </div>
+                                <div class="ml-4 flex-grow">
+                                    <div class="flex justify-between">
+                                        <h3 class="font-semibold text-lg">早餐</h3>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                            <span class="text-xs text-gray-500">07:30</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mt-1">全麦面包 2片 | 鸡蛋 2个 | 牛奶 250ml</p>
+                                    <div class="flex items-center mt-2">
+                                        <span class="text-xs py-1 px-2 bg-green-100 text-green-600 rounded-full">碳水: 45g</span>
+                                        <span class="text-xs py-1 px-2 bg-blue-100 text-blue-600 rounded-full ml-2">蛋白质: 25g</span>
+                                        <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full ml-2">脂肪: 15g</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 午餐 -->
+                        <div class="glass-card rounded-xl p-4 mb-4">
+                            <div class="flex items-start">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
+                                    <i class="fas fa-cloud-sun text-white text-xl"></i>
+                                </div>
+                                <div class="ml-4 flex-grow">
+                                    <div class="flex justify-between">
+                                        <h3 class="font-semibold text-lg">午餐</h3>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
+                                            <span class="text-xs text-gray-500">12:30</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mt-1">糙米饭 1碗 | 鸡胸肉 150g | 西兰花 200g</p>
+                                    <div class="flex items-center mt-2">
+                                        <span class="text-xs py-1 px-2 bg-green-100 text-green-600 rounded-full">碳水: 65g</span>
+                                        <span class="text-xs py-1 px-2 bg-blue-100 text-blue-600 rounded-full ml-2">蛋白质: 35g</span>
+                                        <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full ml-2">脂肪: 20g</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 操作按钮 -->
+                        <div class="flex justify-between mt-4">
+                            <button class="flex-1 mr-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
+                                <i class="fas fa-edit mr-2"></i>修改记录
+                            </button>
+                            <button class="flex-1 ml-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors">
+                                <i class="fas fa-check mr-2"></i>确认记录
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // 标签切换功能
+        // AI助手弹出功能
         document.addEventListener('DOMContentLoaded', function() {
-            const voiceTab = document.querySelector('.glass-card button:first-child');
-            const textTab = document.querySelector('.glass-card button:last-child');
-            const voiceInput = document.querySelector('.glass-card > div:nth-child(2)');
-            const textInput = document.querySelector('.glass-card > div:last-child');
-
-            // 切换到文字输入
-            textTab.addEventListener('click', function() {
-                voiceTab.classList.remove('bg-primary-500', 'text-white');
-                voiceTab.classList.add('bg-gray-100', 'text-gray-600');
-                textTab.classList.remove('bg-gray-100', 'text-gray-600');
-                textTab.classList.add('bg-primary-500', 'text-white');
-                voiceInput.classList.add('hidden');
-                textInput.classList.remove('hidden');
+            const aiAssistantToggle = document.getElementById('ai-assistant-toggle');
+            const aiAssistantContainer = document.getElementById('ai-assistant-container');
+            const aiAssistantClose = document.getElementById('ai-assistant-close');
+            
+            // 点击机器人按钮显示AI助手
+            aiAssistantToggle.addEventListener('click', function() {
+                aiAssistantContainer.classList.add('active');
             });
-
-            // 切换到语音输入
-            voiceTab.addEventListener('click', function() {
-                textTab.classList.remove('bg-primary-500', 'text-white');
-                textTab.classList.add('bg-gray-100', 'text-gray-600');
-                voiceTab.classList.remove('bg-gray-100', 'text-gray-600');
-                voiceTab.classList.add('bg-primary-500', 'text-white');
-                textInput.classList.add('hidden');
-                voiceInput.classList.remove('hidden');
+            
+            // 点击关闭按钮隐藏AI助手
+            aiAssistantClose.addEventListener('click', function() {
+                aiAssistantContainer.classList.remove('active');
             });
+            
+            // 语音和文字输入切换
+            const voiceTab = document.querySelector('#ai-assistant-container .flex.space-x-2 button:first-child');
+            const textTab = document.querySelector('#ai-assistant-container .flex.space-x-2 button:last-child');
+            const voiceInput = document.querySelector('#ai-assistant-container .glass-card > div:nth-child(2)');
+            const textInput = document.querySelector('#ai-assistant-container .glass-card > div:last-child');
+
+            if (voiceTab && textTab && voiceInput && textInput) {
+                // 切换到文字输入
+                textTab.addEventListener('click', function() {
+                    voiceTab.classList.remove('bg-primary-500', 'text-white');
+                    voiceTab.classList.add('bg-gray-100', 'text-gray-600');
+                    textTab.classList.remove('bg-gray-100', 'text-gray-600');
+                    textTab.classList.add('bg-primary-500', 'text-white');
+                    voiceInput.classList.add('hidden');
+                    textInput.classList.remove('hidden');
+                });
+
+                // 切换到语音输入
+                voiceTab.addEventListener('click', function() {
+                    textTab.classList.remove('bg-primary-500', 'text-white');
+                    textTab.classList.add('bg-gray-100', 'text-gray-600');
+                    voiceTab.classList.remove('bg-gray-100', 'text-gray-600');
+                    voiceTab.classList.add('bg-primary-500', 'text-white');
+                    textInput.classList.add('hidden');
+                    voiceInput.classList.remove('hidden');
+                });
+            }
         });
     </script>
 </body>
