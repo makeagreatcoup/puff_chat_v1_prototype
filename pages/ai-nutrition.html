@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI教练 - 健身饮食App</title>
+    <title>饮食助手 - 健身饮食App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
@@ -97,11 +97,11 @@
         </div>
         <div class="flex justify-between items-center relative z-10">
             <div>
-                <h1 class="text-2xl font-bold">AI教练</h1>
+                <h1 class="text-2xl font-bold">饮食助手</h1>
                 <p class="text-white/80 text-base mt-1">语音交互 · 智能建议</p>
             </div>
             <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
-                <i class="fas fa-robot text-white text-lg"></i>
+                <i class="fas fa-utensils text-white text-lg"></i>
             </div>
         </div>
     </div>
@@ -126,7 +126,7 @@
                     <div class="w-20 h-20 rounded-full bg-gradient-primary flex items-center justify-center shadow-lg mb-4">
                         <i class="fas fa-microphone text-white text-2xl"></i>
                     </div>
-                    <p class="text-gray-500 text-sm mb-4">点击开始录音，描述你的训练需求</p>
+                    <p class="text-gray-500 text-sm mb-4">点击开始录音，描述你的饮食需求</p>
                     <button class="px-6 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
                         开始录音
                     </button>
@@ -135,7 +135,7 @@
                 <!-- 文字输入区域（默认隐藏） -->
                 <div class="hidden">
                     <div class="flex items-center space-x-2">
-                        <input type="text" placeholder="输入训练需求..." class="flex-1 glass-morphism rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400/50">
+                        <input type="text" placeholder="输入饮食需求..." class="flex-1 glass-morphism rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-400/50">
                         <button class="px-4 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
                             发送
                         </button>
@@ -144,67 +144,84 @@
             </div>
         </div>
 
-        <!-- 训练建议卡片 -->
+        <!-- 饮食建议卡片 -->
         <div class="px-5 mt-5">
             <div class="glass-card rounded-2xl overflow-hidden">
                 <div class="p-4">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold">今日训练建议</h2>
+                        <h2 class="text-lg font-semibold">今日饮食建议</h2>
                         <div class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
                             <i class="fas fa-clock mr-1"></i>刚刚生成
                         </div>
                     </div>
                     
-                    <!-- 训练时长卡片 -->
+                    <!-- 早餐卡片 -->
                     <div class="glass-card rounded-xl p-4 mb-4">
                         <div class="flex items-start">
                             <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
-                                <i class="fas fa-clock text-white text-xl"></i>
+                                <i class="fas fa-sun text-white text-xl"></i>
                             </div>
                             <div class="ml-4 flex-grow">
                                 <div class="flex justify-between">
-                                    <h3 class="font-semibold text-lg">训练时长</h3>
+                                    <h3 class="font-semibold text-lg">早餐</h3>
                                     <div class="flex items-center">
                                         <i class="fas fa-fire text-orange-400 mr-1 text-xs"></i>
-                                        <span class="text-xs text-gray-500">约 60 分钟</span>
+                                        <span class="text-xs text-gray-500">约 450 kcal</span>
                                     </div>
                                 </div>
-                                <p class="text-sm text-gray-500 mt-1">热身 10分钟 | 力量训练 40分钟 | 拉伸 10分钟</p>
+                                <p class="text-sm text-gray-500 mt-1">全麦面包 2片 | 鸡蛋 2个 | 牛奶 250ml</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="text-xs py-1 px-2 bg-green-100 text-green-600 rounded-full">碳水: 45g</span>
+                                    <span class="text-xs py-1 px-2 bg-blue-100 text-blue-600 rounded-full ml-2">蛋白质: 25g</span>
+                                    <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full ml-2">脂肪: 15g</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 训练动作卡片 -->
-                    <div class="glass-card rounded-xl p-4">
+                    <!-- 午餐卡片 -->
+                    <div class="glass-card rounded-xl p-4 mb-4">
                         <div class="flex items-start">
                             <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
-                                <i class="fas fa-dumbbell text-white text-xl"></i>
+                                <i class="fas fa-cloud-sun text-white text-xl"></i>
                             </div>
                             <div class="ml-4 flex-grow">
                                 <div class="flex justify-between">
-                                    <h3 class="font-semibold text-lg">训练动作</h3>
+                                    <h3 class="font-semibold text-lg">午餐</h3>
                                     <div class="flex items-center">
                                         <i class="fas fa-fire text-orange-400 mr-1 text-xs"></i>
-                                        <span class="text-xs text-gray-500">4个动作</span>
+                                        <span class="text-xs text-gray-500">约 650 kcal</span>
                                     </div>
                                 </div>
-                                <div class="mt-2 space-y-2">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm">深蹲</span>
-                                        <span class="text-xs text-gray-500">4组 × 12次</span>
+                                <p class="text-sm text-gray-500 mt-1">糙米饭 1碗 | 鸡胸肉 150g | 西兰花 200g</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="text-xs py-1 px-2 bg-green-100 text-green-600 rounded-full">碳水: 65g</span>
+                                    <span class="text-xs py-1 px-2 bg-blue-100 text-blue-600 rounded-full ml-2">蛋白质: 35g</span>
+                                    <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full ml-2">脂肪: 20g</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 晚餐卡片 -->
+                    <div class="glass-card rounded-xl p-4">
+                        <div class="flex items-start">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
+                                <i class="fas fa-moon text-white text-xl"></i>
+                            </div>
+                            <div class="ml-4 flex-grow">
+                                <div class="flex justify-between">
+                                    <h3 class="font-semibold text-lg">晚餐</h3>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-fire text-orange-400 mr-1 text-xs"></i>
+                                        <span class="text-xs text-gray-500">约 550 kcal</span>
                                     </div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm">卧推</span>
-                                        <span class="text-xs text-gray-500">3组 × 10次</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm">划船</span>
-                                        <span class="text-xs text-gray-500">3组 × 12次</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm">硬拉</span>
-                                        <span class="text-xs text-gray-500">3组 × 8次</span>
-                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">三文鱼 150g | 藜麦 100g | 芦笋 150g</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="text-xs py-1 px-2 bg-green-100 text-green-600 rounded-full">碳水: 55g</span>
+                                    <span class="text-xs py-1 px-2 bg-blue-100 text-blue-600 rounded-full ml-2">蛋白质: 30g</span>
+                                    <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full ml-2">脂肪: 25g</span>
                                 </div>
                             </div>
                         </div>
@@ -235,13 +252,13 @@
                             <i class="fas fa-history text-primary-500"></i>
                         </div>
                         <div>
-                            <h3 class="font-medium">胸肌训练</h3>
+                            <h3 class="font-medium">增肌饮食</h3>
                             <p class="text-sm text-gray-500">5月25日 14:30</p>
                         </div>
                     </div>
                     <span class="text-xs px-2 py-1 bg-green-100 text-green-600 rounded-full">已完成</span>
                 </div>
-                <p class="text-sm text-gray-500">俯卧撑 3x12 | 卧推 3x10</p>
+                <p class="text-sm text-gray-500">总热量: 1650 kcal | 碳水: 165g | 蛋白质: 90g | 脂肪: 60g</p>
             </div>
         </div>
     </div>
@@ -255,7 +272,7 @@
             <a href="workout.html" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
                 <i class="fas fa-dumbbell text-xl"></i>
             </a>
-            <a href="#" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
+            <a href="ai-assistant.html" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
                 <i class="fas fa-robot text-xl mt-3.5"></i>
             </a>
             <a href="nutrition.html" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
@@ -297,4 +314,4 @@
         });
     </script>
 </body>
-</html>
+</html> 

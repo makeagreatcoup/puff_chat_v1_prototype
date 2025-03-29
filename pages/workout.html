@@ -6,6 +6,7 @@
     <title>健身 - 健身饮食App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -83,10 +84,6 @@
             background: linear-gradient(120deg, #34D399, #3B82F6);
         }
         
-        .bg-gradient-primary {
-            background: linear-gradient(120deg, #FB923C, #F97316);
-        }
-        
         .bg-gradient-secondary {
             background: linear-gradient(120deg, #FB923C, #EA580C);
         }
@@ -147,29 +144,37 @@
         <div class="flex justify-between items-center relative z-10">
             <div>
                 <h1 class="text-2xl font-bold">健身计划</h1>
-                <p class="text-white/80 text-sm mt-1">今日训练 · 全身强化</p>
+                <p class="text-white/80 text-base mt-1">今日训练 · 全身强化</p>
             </div>
             <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
-                <i class="fas fa-dumbbell text-white text-lg" style="color: #2563EB"></i>
+                <i class="fas fa-dumbbell text-white text-lg"></i>
             </div>
         </div>
         
-        <!-- 进度环 -->
-        <div class="mt-5 flex justify-center">
-            <div class="circle-progress">
-                <svg width="80" height="80" viewBox="0 0 80 80">
-                    <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#2563EB" />
-                            <stop offset="100%" stop-color="#7C3AED" />
-                        </linearGradient>
-                    </defs>
-                    <circle class="circle-bg" cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.2)" />
-                    <circle class="circle-progress-value" cx="40" cy="40" r="36" stroke-dasharray="226.08" stroke-dashoffset="96.98" stroke="url(#gradient)" /> <!-- 约57%完成 -->
-                </svg>
-                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <span class="text-xl font-bold text-white">57%</span>
-                    <span class="text-xs text-white/80">本周进度</span>
+        <!-- 训练概览 -->
+        <div class="mt-5 flex justify-between">
+            <div class="bg-white/10 backdrop-blur-md rounded-xl px-4 py-3 w-[48%] flex items-center border border-white/20">
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
+                    <i class="fas fa-calendar-check text-white"></i>
+                </div>
+                <div>
+                    <p class="text-white/90 text-sm">本周完成</p>
+                    <div class="flex items-baseline">
+                        <span class="text-2xl font-bold text-white">4/5</span>
+                        <span class="text-white/90 text-base ml-1">天</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md rounded-xl px-4 py-3 w-[48%] flex items-center border border-white/20">
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
+                    <i class="fas fa-clock text-white"></i>
+                </div>
+                <div>
+                    <p class="text-white/90 text-sm">训练时长</p>
+                    <div class="flex items-baseline">
+                        <span class="text-2xl font-bold text-white">3.5</span>
+                        <span class="text-white/90 text-base ml-1">小时</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,31 +183,31 @@
     <!-- 每日训练记录 -->
     <div class="px-5 mt-5">
         <div class="glass-card rounded-2xl p-4 shadow-lg">
-            <h2 class="text-lg font-semibold mb-3">每周训练</h2>
+            <h2 class="text-xl font-semibold mb-3">每周训练</h2>
             <div class="flex justify-between">
                 <div class="flex flex-col items-center">
                     <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
-                        <span class="text-xs">一</span>
+                        <span class="text-sm">一</span>
                     </div>
-                    <span class="text-xs text-primary-500">完成</span>
+                    <span class="text-sm text-primary-500">完成</span>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
                         <span class="text-xs">二</span>
                     </div>
-                    <span class="text-xs text-primary-500">完成</span>
+                    <span class="text-sm text-primary-500">完成</span>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
                         <span class="text-xs">三</span>
                     </div>
-                    <span class="text-xs text-primary-500">完成</span>
+                    <span class="text-sm text-primary-500">完成</span>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
                         <span class="text-xs">四</span>
                     </div>
-                    <span class="text-xs text-primary-500">完成</span>
+                    <span class="text-sm text-primary-500">完成</span>
                 </div>
                 <div class="flex flex-col items-center relative">
                     <div class="w-11 h-11 rounded-full border-2 border-primary-400 bg-white flex items-center justify-center mb-1 shadow-lg animate-pulse-slow">
@@ -346,55 +351,22 @@
             <div class="p-4 bg-gradient-to-r from-primary-400/10 to-transparent">
                 <div class="flex justify-between card-3d-content">
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold text-secondary">12</h3>
+                        <h3 class="text-2xl font-bold text-secondary">8.5</h3>
                         <p class="text-xs text-gray-500">本周训练 (小时)</p>
                     </div>
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold text-secondary">1240</h3>
+                        <h3 class="text-2xl font-bold text-secondary">2,450</h3>
                         <p class="text-xs text-gray-500">消耗 (kcal)</p>
                     </div>
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold text-secondary">18</h3>
+                        <h3 class="text-2xl font-bold text-secondary">32</h3>
                         <p class="text-xs text-gray-500">完成 (动作)</p>
                     </div>
                 </div>
             </div>
-            <!-- 简单折线图 -->
+            <!-- ECharts 图表 -->
             <div class="px-4 pb-4 card-3d-content">
-                <div class="h-40 flex items-end space-x-1">
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 30%"></div>
-                        <span class="text-xs text-gray-500 mt-1">一</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 60%"></div>
-                        <span class="text-xs text-gray-500 mt-1">二</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 40%"></div>
-                        <span class="text-xs text-gray-500 mt-1">三</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 80%"></div>
-                        <span class="text-xs text-gray-500 mt-1">四</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1 relative">
-                        <div class="w-full relative bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 20%">
-                            <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 text-xs text-primary-500 font-bold bg-white px-2 py-1 rounded-full shadow-sm">
-                                今天
-                            </div>
-                        </div>
-                        <span class="text-xs text-gray-500 mt-1">五</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gray-200 rounded-t-md transition-all duration-500" style="height: 10%"></div>
-                        <span class="text-xs text-gray-500 mt-1">六</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gray-200 rounded-t-md transition-all duration-500" style="height: 10%"></div>
-                        <span class="text-xs text-gray-500 mt-1">日</span>
-                    </div>
-                </div>
+                <div id="workoutChart" style="width: 100%; height: 300px;"></div>
             </div>
         </div>
     </div>
@@ -402,38 +374,126 @@
     <!-- 底部导航栏 -->
     <div class="fixed bottom-5 left-1/2 transform -translate-x-1/2 glass-morphism rounded-full shadow-lg px-6 py-3 w-auto">
         <div class="flex space-x-10 items-center">
-            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+            <a href="home.html" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
                 <i class="fas fa-home text-xl"></i>
             </a>
-            <a href="#" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500 relative">
-                <div class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary-500"></div>
+            <a href="#" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500">
                 <i class="fas fa-dumbbell text-xl"></i>
             </a>
             <a href="ai-assistant.html" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
-                <i class="fas fa-comment-dots text-xl mt-3.5"></i>
+                <i class="fas fa-robot text-xl mt-3.5"></i>
             </a>
-            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+            <a href="nutrition.html" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
                 <i class="fas fa-utensils text-xl"></i>
             </a>
-            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+            <a href="profile.html" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
                 <i class="fas fa-user text-xl"></i>
             </a>
         </div>
     </div>
 
     <script>
-        // 模拟加载时的动画效果
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                const bars = document.querySelectorAll('.bg-gradient-primary');
-                bars.forEach(bar => {
-                    const height = bar.style.height;
-                    bar.style.height = '0%';
-                    setTimeout(() => {
-                        bar.style.height = height;
-                    }, 100);
-                });
-            }, 500);
+        // 初始化 ECharts 图表
+        window.addEventListener('load', function() {
+            const chartDom = document.getElementById('workoutChart');
+            if (!chartDom) {
+                console.error('Chart container not found');
+                return;
+            }
+            
+            const myChart = echarts.init(chartDom, null, {
+                renderer: 'canvas',
+                useDirtyRect: false
+            });
+
+            const option = {
+                grid: {
+                    top: 40,
+                    right: 20,
+                    bottom: 40,
+                    left: 0,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['一', '二', '三', '四', '五', '六', '日'],
+                    axisLine: {
+                        lineStyle: {
+                            color: '#E5E7EB'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#6B7280',
+                        fontSize: 14
+                    },
+                    boundaryGap: false
+                },
+                yAxis: {
+                    type: 'value',
+                    show: true,
+                    max: 2,
+                    min: 0,
+                    interval: 0.5,
+                    splitLine: {
+                        lineStyle: {
+                            color: '#E5E7EB',
+                            type: 'dashed'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#6B7280',
+                        fontSize: 14
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#E5E7EB'
+                        }
+                    }
+                },
+                title: {
+                    text: '训练时长(小时)',
+                    left: 'center',
+                    top: 10,
+                    textStyle: {
+                        color: '#6B7280',
+                        fontSize: 14
+                    }
+                },
+                series: [
+                    {
+                        data: [0.75, 1, 1.5, 1.25, 0.5, '-', '-'],
+                        type: 'line',
+                        smooth: true,
+                        symbol: 'circle',
+                        symbolSize: 10,
+                        lineStyle: {
+                            width: 4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                                { offset: 0, color: '#34D399' },
+                                { offset: 1, color: '#3B82F6' }
+                            ])
+                        },
+                        itemStyle: {
+                            color: '#3B82F6',
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: 'rgba(52, 211, 153, 0.2)' },
+                                { offset: 1, color: 'rgba(59, 130, 246, 0)' }
+                            ])
+                        }
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+
+            // 响应式调整
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            });
         });
     </script>
 </body>
