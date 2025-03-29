@@ -9,7 +9,8 @@
 │   ├── home.html         # 首页
 │   ├── workout.html      # 健身页面
 │   ├── nutrition.html    # 营养饮食页面
-│   ├── ai-assistant.html # AI聊天助手页面
+│   ├── ai-assistant.html # AI健身教练聊天助手页面
+│   ├── ai-nutrition.html # AI营养师聊天助手页面
 │   └── profile.html      # 个人中心页面
 ├── index.html            # 主入口文件，展示所有页面
 ├── index-starter.html    # 初始框架文件
@@ -78,11 +79,12 @@
 
 ### AI聊天
 
-- 与AI健身教练对话
-- 与AI营养师咨询
-- 聊天角色切换功能
+- 与AI健身教练对话（ai-assistant.html）
+- 与AI营养师咨询（ai-nutrition.html）
+- 语音和文字输入切换功能
+- 训练计划和饮食建议生成
 - 聊天历史记录
-- 滑动式界面交互
+- 独立页面交互模式
 
 ### 个人中心
 
