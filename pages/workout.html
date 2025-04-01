@@ -3,438 +3,480 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>健身 - 健身饮食App</title>
+    <title>Puff健身 - 训练计划</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#eefdf8',
-                            100: '#d4f8ed',
-                            200: '#a9eddd',
-                            300: '#72ddc8',
-                            400: '#34D399', // 主色
-                            500: '#1cb881',
-                            600: '#10966b',
-                            700: '#107658',
-                            800: '#115e49',
-                            900: '#114d3d',
-                        },
-                        secondary: '#1F2937',
-                        light: '#F9FAFB',
-                        dark: '#111827',
-                    },
-                    fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'bounce-slow': 'bounce 3s infinite',
-                    },
-                },
-            },
-        }
-    </script>
     <style>
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #333;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .scrollable {
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            height: calc(100vh - 120px);
+            width: 100%;
+            padding: 0 1rem;
+            overflow-x: hidden;
+            flex: 1;
+        }
+        
+        .scrollable::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            background: transparent;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100%;
+        }
+        
+        html::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            background: transparent;
         }
         
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-        }
-        
-        .circle-progress {
-            position: relative;
-            width: 80px;
-            height: 80px;
-        }
-        
-        .circle-progress svg {
-            transform: rotate(-90deg);
-        }
-        
-        .circle-progress circle {
-            fill: none;
-            stroke-width: 8;
-            stroke-linecap: round;
-        }
-        
-        .circle-bg {
-            stroke: #f3f4f6;
-        }
-        
-        .circle-progress-value {
-            stroke: url(#gradient);
-            transition: stroke-dashoffset 1s;
-        }
-        
-        .bg-gradient-primary {
-            background: linear-gradient(120deg, #34D399, #3B82F6);
-        }
-        
-        .bg-gradient-purple {
-            background: linear-gradient(120deg, #8B5CF6, #EC4899);
-        }
-        
-        .bg-gradient-orange {
-            background: linear-gradient(120deg, #F59E0B, #EF4444);
-        }
-        
-        .bg-pattern {
-            background-color: #F9FAFB;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334D399' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        
-        /* 3D Card Effect */
-        .card-3d {
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
-            transition: transform 0.3s;
-        }
-        
-        .card-3d:hover {
-            transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
-        }
-        
-        .card-3d-content {
-            transform: translateZ(20px);
-            transition: transform 0.3s;
-        }
-        
-        .hover-scale {
-            transition: transform 0.3s;
-        }
-        
-        .hover-scale:hover {
-            transform: scale(1.03);
         }
 
-        /* 隐藏滚动条 */
-        ::-webkit-scrollbar {
-            display: none;
+        .week-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .week-content.expanded {
+            max-height: 2000px;
+            opacity: 1;
+        }
+
+        .rest-day {
+            background: rgba(229, 231, 235, 0.8);
+        }
+
+        /* 时间轴样式 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            width: 100%;
         }
         
-        * {
-            -ms-overflow-style: none;  /* IE 和 Edge */
-            scrollbar-width: none;  /* Firefox */
+        /* 时间轴竖线 */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #d1d5db;
+            z-index: 0;
         }
         
-        html, body {
-            overflow-y: auto;
-            overflow-x: hidden;
+        /* 确保时间轴内容宽度占满 */
+        .timeline > div {
+            width: 100%;
+        }
+        
+        .timeline-day {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .timeline-day::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #6366f1;
+            border: 2px solid #fff;
+            z-index: 1;
+        }
+
+        .workout-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .workout-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
-<body class="bg-pattern font-sans text-secondary">
-    <!-- 顶部导航 -->
-    <div class="bg-gradient-primary text-white pt-14 px-5 pb-5 rounded-b-3xl relative">
-        <div class="absolute top-0 left-0 w-full h-full opacity-20">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute top-0 left-0 h-full w-full">
-                <path fill="#fff" fill-opacity="0.3" d="M0,224L30,218.7C60,213,120,203,180,170.7C240,139,300,85,360,74.7C420,64,480,96,540,122.7C600,149,660,171,720,165.3C780,160,840,128,900,117.3C960,107,1020,117,1080,138.7C1140,160,1200,192,1260,192C1320,192,1380,160,1410,144L1440,128L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z"></path>
-            </svg>
+<body class="flex flex-col h-full">
+    <!-- 顶部导航栏 -->
+    <header class="p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold">训练计划</h1>
+        <div class="flex space-x-3">
+            <button class="p-2 rounded-full bg-gray-100">
+                <i class="fas fa-cog text-gray-600"></i>
+            </button>
         </div>
-        <div class="flex justify-between items-center relative z-10">
-            <div>
-                <h1 class="text-2xl font-bold">健身计划</h1>
-                <p class="text-white/80 text-sm mt-1">今日训练 · 全身强化</p>
-            </div>
-            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shadow-lg backdrop-blur-md">
-                <i class="fas fa-dumbbell text-white text-lg"></i>
-            </div>
-        </div>
-        
-        <!-- 进度环 -->
-        <div class="mt-5 flex justify-center">
-            <div class="circle-progress">
-                <svg width="80" height="80" viewBox="0 0 80 80">
-                    <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#34D399" />
-                            <stop offset="100%" stop-color="#3B82F6" />
-                        </linearGradient>
-                    </defs>
-                    <circle class="circle-bg" cx="40" cy="40" r="36" />
-                    <circle class="circle-progress-value" cx="40" cy="40" r="36" stroke-dasharray="226.08" stroke-dashoffset="96.98" /> <!-- 约57%完成 -->
-                </svg>
-                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <span class="text-xl font-bold text-white">57%</span>
-                    <span class="text-xs text-white/80">本周进度</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 每日训练记录 -->
-    <div class="px-5 mt-5">
-        <div class="glass-card rounded-2xl p-4 shadow-lg">
-            <h2 class="text-lg font-semibold mb-3">每周训练</h2>
-            <div class="flex justify-between">
-                <div class="flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
-                        <span class="text-xs">一</span>
-                    </div>
-                    <span class="text-xs text-primary-500">完成</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
-                        <span class="text-xs">二</span>
-                    </div>
-                    <span class="text-xs text-primary-500">完成</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
-                        <span class="text-xs">三</span>
-                    </div>
-                    <span class="text-xs text-primary-500">完成</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-primary-400 flex items-center justify-center text-white mb-1 shadow-md">
-                        <span class="text-xs">四</span>
-                    </div>
-                    <span class="text-xs text-primary-500">完成</span>
-                </div>
-                <div class="flex flex-col items-center relative">
-                    <div class="w-11 h-11 rounded-full border-2 border-primary-400 bg-white flex items-center justify-center mb-1 shadow-lg animate-pulse-slow">
-                        <span class="text-xs text-primary-500 font-medium">五</span>
-                    </div>
-                    <div class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary-500 text-white text-xs flex items-center justify-center shadow-md">
-                        <i class="fas fa-star text-[10px]"></i>
-                    </div>
-                    <span class="text-xs text-primary-600 font-medium">今天</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-1">
-                        <span class="text-xs">六</span>
-                    </div>
-                    <span class="text-xs text-gray-500">休息</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-1">
-                        <span class="text-xs">日</span>
-                    </div>
-                    <span class="text-xs text-gray-500">休息</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    </header>
 
-    <!-- 今日训练计划 -->
-    <div class="px-5 py-4">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold">今日训练</h2>
-            <div class="text-xs px-3 py-1 rounded-full bg-primary-400/10 text-primary-500">
-                <i class="fas fa-calendar-day mr-1"></i>5月25日
-            </div>
-        </div>
-        <div class="space-y-4">
-            <!-- 训练项目1 -->
-            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
-                <div class="flex items-start p-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 shadow-md">
-                        <i class="fas fa-running text-white text-xl"></i>
+    <!-- 主要内容区 -->
+    <main class="flex-1 scrollable pb-20">
+        <!-- 训练计划 -->
+        <div class="glass-card p-4 mb-4">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                        <i class="fas fa-calendar-alt text-blue-600"></i>
                     </div>
-                    <div class="ml-4 flex-grow">
-                        <div class="flex justify-between">
-                            <h3 class="font-semibold text-lg">热身有氧</h3>
-                            <div class="flex items-center">
-                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
-                                <span class="text-xs text-gray-500">10分钟</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1">慢跑 10分钟</p>
-                        <div class="flex items-center mt-2">
-                            <span class="text-xs py-1 px-2 bg-primary-100 text-primary-600 rounded-full">简单</span>
-                            <div class="ml-auto flex items-center">
-                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
-                                <span class="text-xs text-gray-600">约 100 卡路里</span>
-                            </div>
-                        </div>
+                    <div>
+                        <h2 class="text-lg font-bold">八周增肌计划</h2>
+                        <p class="text-sm text-gray-500">8周</p>
                     </div>
-                </div>
-                <div class="bg-primary-50 px-4 py-2 text-sm flex justify-between items-center">
-                    <div class="flex items-center">
-                        <i class="fas fa-info-circle text-primary-500 mr-2"></i>
-                        <span class="text-primary-700">适合初学者的有氧训练</span>
-                    </div>
-                    <i class="fas fa-chevron-right text-primary-400"></i>
                 </div>
             </div>
-            
-            <!-- 训练项目2 -->
-            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
-                <div class="flex items-start p-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-purple flex items-center justify-center flex-shrink-0 shadow-md">
-                        <i class="fas fa-dumbbell text-white text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <div class="flex justify-between">
-                            <h3 class="font-semibold text-lg">胸肌训练</h3>
-                            <div class="flex items-center">
-                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
-                                <span class="text-xs text-gray-500">25分钟</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1">俯卧撑 3x12 | 卧推 3x10</p>
-                        <div class="flex items-center mt-2">
-                            <span class="text-xs py-1 px-2 bg-yellow-100 text-yellow-600 rounded-full">中等</span>
-                            <div class="ml-auto flex items-center">
-                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
-                                <span class="text-xs text-gray-600">约 150 卡路里</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-purple-50 px-4 py-2 text-sm flex justify-between items-center">
-                    <div class="flex items-center">
-                        <i class="fas fa-info-circle text-purple-500 mr-2"></i>
-                        <span class="text-purple-700">专注于胸肌和肱三头肌</span>
-                    </div>
-                    <i class="fas fa-chevron-right text-purple-400"></i>
-                </div>
-            </div>
-            
-            <!-- 训练项目3 -->
-            <div class="glass-card rounded-2xl hover-scale overflow-hidden">
-                <div class="flex items-start p-4">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-orange flex items-center justify-center flex-shrink-0 shadow-md">
-                        <i class="fas fa-fire text-white text-xl"></i>
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <div class="flex justify-between">
-                            <h3 class="font-semibold text-lg">腹肌训练</h3>
-                            <div class="flex items-center">
-                                <i class="fas fa-clock text-gray-400 mr-1 text-xs"></i>
-                                <span class="text-xs text-gray-500">20分钟</span>
-                            </div>
-                        </div>
-                        <p class="text-sm text-gray-500 mt-1">卷腹 3x15 | 平板支撑 2x60秒</p>
-                        <div class="flex items-center mt-2">
-                            <span class="text-xs py-1 px-2 bg-red-100 text-red-600 rounded-full">困难</span>
-                            <div class="ml-auto flex items-center">
-                                <i class="fas fa-fire-flame-curved text-orange-400 mr-1"></i>
-                                <span class="text-xs text-gray-600">约 200 卡路里</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-orange-50 px-4 py-2 text-sm flex justify-between items-center">
-                    <div class="flex items-center">
-                        <i class="fas fa-info-circle text-orange-500 mr-2"></i>
-                        <span class="text-orange-700">增强核心肌群力量</span>
-                    </div>
-                    <i class="fas fa-chevron-right text-orange-400"></i>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- 健身统计分析 -->
-    <div class="px-5 py-4 mb-28">
-        <h2 class="text-lg font-semibold text-secondary mb-4">数据统计</h2>
-        <div class="glass-card rounded-2xl overflow-hidden card-3d">
-            <div class="p-4 bg-gradient-to-r from-primary-400/10 to-transparent">
-                <div class="flex justify-between card-3d-content">
-                    <div class="text-center">
-                        <h3 class="text-2xl font-bold text-secondary">12</h3>
-                        <p class="text-xs text-gray-500">本周训练 (小时)</p>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-2xl font-bold text-secondary">1240</h3>
-                        <p class="text-xs text-gray-500">消耗 (卡路里)</p>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-2xl font-bold text-secondary">18</h3>
-                        <p class="text-xs text-gray-500">完成 (动作)</p>
-                    </div>
+            <!-- 训练日期选择 -->
+            <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-600 mb-2">训练日期</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 text-sm">周一</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-sm">周二</button>
+                    <button class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 text-sm">周三</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-sm">周四</button>
+                    <button class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 text-sm">周五</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-sm">周六</button>
+                    <button class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-sm">周日</button>
                 </div>
             </div>
-            <!-- 简单折线图 -->
-            <div class="px-4 pb-4 card-3d-content">
-                <div class="h-40 flex items-end space-x-1">
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 30%"></div>
-                        <span class="text-xs text-gray-500 mt-1">一</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 60%"></div>
-                        <span class="text-xs text-gray-500 mt-1">二</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 40%"></div>
-                        <span class="text-xs text-gray-500 mt-1">三</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 80%"></div>
-                        <span class="text-xs text-gray-500 mt-1">四</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1 relative">
-                        <div class="w-full relative bg-gradient-primary rounded-t-md transition-all duration-500" style="height: 20%">
-                            <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 text-xs text-primary-500 font-bold bg-white px-2 py-1 rounded-full shadow-sm">
-                                今天
-                            </div>
-                        </div>
-                        <span class="text-xs text-gray-500 mt-1">五</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gray-200 rounded-t-md transition-all duration-500" style="height: 10%"></div>
-                        <span class="text-xs text-gray-500 mt-1">六</span>
-                    </div>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="w-full bg-gray-200 rounded-t-md transition-all duration-500" style="height: 10%"></div>
-                        <span class="text-xs text-gray-500 mt-1">日</span>
-                    </div>
-                </div>
+
+            <!-- 进度条 -->
+            <div class="flex items-center justify-between text-sm mb-2">
+                <span class="text-gray-600">进度</span>
+                <span class="text-indigo-600 font-medium">第1周/共8周</span>
+            </div>
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-indigo-600 rounded-full" style="width: 12.5%"></div>
             </div>
         </div>
-    </div>
+
+        <!-- 每周训练计划 -->
+        <section class="space-y-6">
+            <!-- 第一周 -->
+            <div class="week-container">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold">第一周</h2>
+                </div>
+            
+                <div id="week-1" class="timeline expanded">
+                    <!-- 第1天 -->
+                    <div class="timeline-day">
+                        <h3 class="text-lg font-medium mb-4">第1天</h3>
+                        <div class="space-y-4">
+                            <!-- 训练项目1 -->
+                            <div class="workout-card glass-card p-4" data-workout-id="workout-1-1">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-grow">
+                                        <h3 class="font-medium text-lg">运动初始·全身唤醒</h3>
+                                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>训练·7分钟</span>
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-fire-alt mr-2"></i>
+                                            <span>K1·19千卡</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300" id="workout-1-1-icon"></i>
+                                </div>
+                                <div id="workout-1-1" class="mt-4 hidden w-full">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                                    <span class="text-sm font-bold text-indigo-600">1</span>
+                                                </div>
+                                                <span>开合跳</span>
+                                            </div>
+                                            <span class="text-sm text-gray-500">3组 × 12次</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                                    <span class="text-sm font-bold text-indigo-600">2</span>
+                                                </div>
+                                                <span>高抬腿</span>
+                                            </div>
+                                            <span class="text-sm text-gray-500">3组 × 30秒</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 训练项目2 -->
+                            <div class="workout-card glass-card p-4" data-workout-id="workout-1-2">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-grow">
+                                        <h3 class="font-medium text-lg">全身拉伸</h3>
+                                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>训练·15分钟</span>
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-fire-alt mr-2"></i>
+                                            <span>K1·45千卡</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300" id="workout-1-2-icon"></i>
+                                </div>
+                                <div id="workout-1-2" class="mt-4 hidden w-full">
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                                    <span class="text-sm font-bold text-indigo-600">1</span>
+                                                </div>
+                                                <span>颈部拉伸</span>
+                                            </div>
+                                            <span class="text-sm text-gray-500">30秒 × 3组</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                                    <span class="text-sm font-bold text-indigo-600">2</span>
+                                                </div>
+                                                <span>肩部拉伸</span>
+                                            </div>
+                                            <span class="text-sm text-gray-500">30秒 × 3组</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-2">
+                                                    <span class="text-sm font-bold text-indigo-600">3</span>
+                                                </div>
+                                                <span>腿部拉伸</span>
+                                            </div>
+                                            <span class="text-sm text-gray-500">30秒 × 3组</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第2天 -->
+                    <div class="timeline-day">
+                        <h3 class="text-lg font-medium mb-4">第2天</h3>
+                        <div class="space-y-4">
+                            <!-- 训练项目1 -->
+                            <div class="workout-card glass-card p-4" data-workout-id="workout-2-1">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-grow">
+                                        <h3 class="font-medium text-lg">HIIT 身体唤醒</h3>
+                                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>训练·9分钟</span>
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-fire-alt mr-2"></i>
+                                            <span>K1·44千卡</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300" id="workout-2-1-icon"></i>
+                                </div>
+                                <div id="workout-2-1" class="mt-4 hidden w-full">
+                                    <div class="border-t pt-4">
+                                        <h4 class="font-medium mb-2">训练动作</h4>
+                                        <ul class="space-y-2 text-gray-600">
+                                            <li class="flex items-center">
+                                                <span class="w-32">波比跳</span>
+                                                <span>45秒 × 3组</span>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <span class="w-32">登山跑</span>
+                                                <span>30秒 × 4组</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 训练项目2 -->
+                            <div class="workout-card glass-card p-4" data-workout-id="workout-2-2">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-grow">
+                                        <h3 class="font-medium text-lg">太极Fit·身展心畅</h3>
+                                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>训练·17分钟</span>
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-fire-alt mr-2"></i>
+                                            <span>K1·48千卡</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300" id="workout-2-2-icon"></i>
+                                </div>
+                                <div id="workout-2-2" class="mt-4 hidden w-full">
+                                    <div class="border-t pt-4">
+                                        <h4 class="font-medium mb-2">训练动作</h4>
+                                        <ul class="space-y-2 text-gray-600">
+                                            <li class="flex items-center">
+                                                <span class="w-32">云手</span>
+                                                <span>2分钟 × 2组</span>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <span class="w-32">太极步</span>
+                                                <span>3分钟 × 2组</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第3天 -->
+                    <div class="timeline-day">
+                        <h3 class="text-lg font-medium mb-4">第3天</h3>
+                        <div class="glass-card rest-day p-4">
+                            <div class="flex items-center">
+                                <div class="flex-grow">
+                                    <h3 class="font-medium text-lg">休息日</h3>
+                                    <p class="text-sm text-gray-500 mt-2">充分恢复，为下次训练做准备</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第4天 -->
+                    <div class="timeline-day">
+                        <h3 class="text-lg font-medium mb-4">第4天</h3>
+                        <div class="space-y-4">
+                            <div class="workout-card glass-card p-4" data-workout-id="workout-4-1">
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-grow">
+                                        <h3 class="font-medium text-lg">热汗瑜伽·腹部激活</h3>
+                                        <div class="flex items-center text-sm text-gray-500 mt-2">
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>训练·15分钟</span>
+                                            <span class="mx-2">|</span>
+                                            <i class="fas fa-fire-alt mr-2"></i>
+                                            <span>K1·62千卡</span>
+                                        </div>
+                                    </div>
+                                    <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300" id="workout-4-1-icon"></i>
+                                </div>
+                                <div id="workout-4-1" class="mt-4 hidden w-full">
+                                    <div class="border-t pt-4">
+                                        <h4 class="font-medium mb-2">训练动作</h4>
+                                        <ul class="space-y-2 text-gray-600">
+                                            <li class="flex items-center">
+                                                <span class="w-32">卷腹</span>
+                                                <span>15次 × 3组</span>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <span class="w-32">平板支撑</span>
+                                                <span>45秒 × 3组</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- 底部导航栏 -->
-    <div class="fixed bottom-5 left-1/2 transform -translate-x-1/2 glass-morphism rounded-full shadow-lg px-6 py-3 w-auto">
-        <div class="flex space-x-10 items-center">
-            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+    <footer class="bg-white border-t border-gray-200 p-2 fixed bottom-0 left-0 right-0">
+        <div class="flex justify-around">
+            <a href="home.html" class="flex flex-col items-center text-gray-400">
                 <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1">首页</span>
             </a>
-            <a href="#" class="flex flex-col items-center px-2 py-1 rounded-full bg-primary-400/10 text-primary-500 relative">
-                <div class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary-500"></div>
+            <a href="#" class="flex flex-col items-center text-indigo-600">
+                <i class="fas fa-calendar-alt text-xl"></i>
+                <span class="text-xs mt-1">计划</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-400">
                 <i class="fas fa-dumbbell text-xl"></i>
+                <span class="text-xs mt-1">训练</span>
             </a>
-            <a href="ai-assistant.html" class="flex flex-col items-center rounded-full w-12 h-12 bg-gradient-primary shadow-lg text-white -mt-4">
-                <i class="fas fa-comment-dots text-xl mt-3.5"></i>
-            </a>
-            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
-                <i class="fas fa-utensils text-xl"></i>
-            </a>
-            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary-500 transition-colors">
+            <a href="profile.html" class="flex flex-col items-center text-gray-400">
                 <i class="fas fa-user text-xl"></i>
+                <span class="text-xs mt-1">我的</span>
             </a>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // 模拟加载时的动画效果
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                const bars = document.querySelectorAll('.bg-gradient-primary');
-                bars.forEach(bar => {
-                    const height = bar.style.height;
-                    bar.style.height = '0%';
-                    setTimeout(() => {
-                        bar.style.height = height;
-                    }, 100);
+        function toggleWeek(weekId) {
+            const weekContent = document.getElementById(weekId);
+            const icon = document.getElementById(weekId + '-icon');
+            
+            if (weekContent.classList.contains('expanded')) {
+                weekContent.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                weekContent.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function toggleWorkout(workoutId) {
+            const content = document.getElementById(workoutId);
+            const icon = document.getElementById(workoutId + '-icon');
+            
+            if (content && icon) {
+                if (content.classList.contains('hidden')) {
+                    content.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    content.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        // 默认展开第一周
+        window.onload = function() {
+            // 确保所有元素都已加载
+            document.querySelectorAll('.workout-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const workoutId = this.getAttribute('data-workout-id');
+                    toggleWorkout(workoutId);
                 });
-            }, 500);
-        });
+            });
+            toggleWeek('week-1');
+        }
     </script>
 </body>
 </html>
