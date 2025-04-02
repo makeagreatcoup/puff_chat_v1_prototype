@@ -81,84 +81,98 @@
     <main class="scrollable">
         <!-- 基本信息 -->
         <section class="glass-card p-4 mb-6 mt-4">
-            <h3 class="font-bold mb-4">基本信息</h3>
-            
-            <div class="mb-4">
-                <label for="plan-name" class="block text-sm font-medium text-gray-700 mb-1">计划名称</label>
-                <input type="text" id="plan-name" name="plan-name" value="八周增肌计划" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label for="plan-weeks" class="block text-sm font-medium text-gray-700 mb-1">计划周期</label>
-                    <div class="relative">
-                        <input type="number" id="plan-weeks" name="plan-weeks" value="8" min="1" max="52" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        <span class="absolute right-3 top-2 text-gray-500">周</span>
-                    </div>
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                    <i class="fas fa-info-circle text-blue-600"></i>
                 </div>
                 <div>
-                    <label for="plan-days" class="block text-sm font-medium text-gray-700 mb-1">每周训练天数</label>
-                    <div class="relative">
-                        <input type="number" id="plan-days" name="plan-days" value="3" min="1" max="7" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                        <span class="absolute right-3 top-2 text-gray-500">天</span>
+                    <h3 class="font-bold">基本信息</h3>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 rounded-xl p-4 mb-4">
+                <div class="mb-4">
+                    <label for="plan-name" class="block text-sm font-medium text-gray-700 mb-1">计划名称</label>
+                    <input type="text" id="plan-name" name="plan-name" value="八周增肌计划" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="plan-weeks" class="block text-sm font-medium text-gray-700 mb-1">计划周期</label>
+                        <div class="relative">
+                            <input type="number" id="plan-weeks" name="plan-weeks" value="8" min="1" max="52" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+                            <span class="absolute right-3 top-2 text-gray-500">周</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="plan-days" class="block text-sm font-medium text-gray-700 mb-1">每周训练天数</label>
+                        <div class="relative">
+                            <input type="number" id="plan-days" name="plan-days" value="3" min="1" max="7" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+                            <span class="absolute right-3 top-2 text-gray-500">天</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-1">训练日</label>
-                <div class="flex flex-wrap gap-2">
-                    <label class="inline-flex items-center px-3 py-2 rounded-md border border-gray-300">
-                        <input type="checkbox" name="training-days" value="1" class="form-checkbox h-4 w-4 text-indigo-600" checked>
-                        <span class="ml-2">周一</span>
-                    </label>
-                    <label class="inline-flex items-center px-3 py-2 rounded-md border border-gray-300">
-                        <input type="checkbox" name="training-days" value="2" class="form-checkbox h-4 w-4 text-indigo-600">
-                        <span class="ml-2">周二</span>
-                    </label>
-                    <label class="inline-flex items-center px-3 py-2 rounded-md border border-gray-300">
-                        <input type="checkbox" name="training-days" value="3" class="form-checkbox h-4 w-4 text-indigo-600" checked>
-                        <span class="ml-2">周三</span>
-                    </label>
-                    <label class="inline-flex items-center px-3 py-2 rounded-md border border-gray-300">
-                        <input type="checkbox" name="training-days" value="4" class="form-checkbox h-4 w-4 text-indigo-600">
-                        <span class="ml-2">周四</span>
-                    </label>
-                    <label class="inline-flex items-center px-3 py-2 rounded-md border border-gray-300">
-                        <input type="checkbox" name="training-days" value="5" class="form-checkbox h-4 w-4 text-indigo-600" checked>
-                        <span class="ml-2">周五</span>
-                    </label>
-                    <label class="inline-flex items-center px-3 py-2 rounded-md border border-gray-300">
-                        <input type="checkbox" name="training-days" value="6" class="form-checkbox h-4 w-4 text-indigo-600">
-                        <span class="ml-2">周六</span>
-                    </label>
-                    <label class="inline-flex items-center px-3 py-2 rounded-md border border-gray-300">
-                        <input type="checkbox" name="training-days" value="0" class="form-checkbox h-4 w-4 text-indigo-600">
-                        <span class="ml-2">周日</span>
-                    </label>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">训练日</label>
+                    <div class="flex flex-wrap gap-2">
+                        <label class="inline-flex items-center px-3 py-2 rounded-md bg-white border border-gray-300">
+                            <input type="checkbox" name="training-days" value="1" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                            <span class="ml-2">周一</span>
+                        </label>
+                        <label class="inline-flex items-center px-3 py-2 rounded-md bg-white border border-gray-300">
+                            <input type="checkbox" name="training-days" value="2" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <span class="ml-2">周二</span>
+                        </label>
+                        <label class="inline-flex items-center px-3 py-2 rounded-md bg-white border border-gray-300">
+                            <input type="checkbox" name="training-days" value="3" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                            <span class="ml-2">周三</span>
+                        </label>
+                        <label class="inline-flex items-center px-3 py-2 rounded-md bg-white border border-gray-300">
+                            <input type="checkbox" name="training-days" value="4" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <span class="ml-2">周四</span>
+                        </label>
+                        <label class="inline-flex items-center px-3 py-2 rounded-md bg-white border border-gray-300">
+                            <input type="checkbox" name="training-days" value="5" class="form-checkbox h-4 w-4 text-indigo-600" checked>
+                            <span class="ml-2">周五</span>
+                        </label>
+                        <label class="inline-flex items-center px-3 py-2 rounded-md bg-white border border-gray-300">
+                            <input type="checkbox" name="training-days" value="6" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <span class="ml-2">周六</span>
+                        </label>
+                        <label class="inline-flex items-center px-3 py-2 rounded-md bg-white border border-gray-300">
+                            <input type="checkbox" name="training-days" value="0" class="form-checkbox h-4 w-4 text-indigo-600">
+                            <span class="ml-2">周日</span>
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label for="plan-description" class="block text-sm font-medium text-gray-700 mb-1">计划描述</label>
-                <textarea id="plan-description" name="plan-description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">这是一个专为增肌设计的8周训练计划，每周训练3天，主要针对全身大肌群，适合中级健身者。</textarea>
+                <div>
+                    <label for="plan-description" class="block text-sm font-medium text-gray-700 mb-1">计划描述</label>
+                    <textarea id="plan-description" name="plan-description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">这是一个专为增肌设计的8周训练计划，每周训练3天，主要针对全身大肌群，适合中级健身者。</textarea>
+                </div>
             </div>
         </section>
 
         <!-- 训练课程 -->
         <section class="glass-card p-4 mb-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-bold">训练课程</h3>
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                    <i class="fas fa-dumbbell text-green-600"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold">训练课程</h3>
+                </div>
                 <button id="add-week" class="text-sm text-indigo-600">添加课程</button>
             </div>
 
             <!-- 训练课程内容 -->
-            <div class="week-container mb-6">
+            <div class="week-container mb-6 space-y-4">
 
-                <!-- 周一训练 -->
-                <div class="training-day mb-4 border border-gray-200 rounded-md p-3">
-                    <div class="flex justify-between items-center mb-2">
-                        <h5 class="font-medium">上肢训练</h5>
+                <!-- 上肢训练 -->
+                <div class="bg-white rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-medium">上肢训练</h4>
                         <div class="flex space-x-2">
                             <button class="text-gray-500 hover:text-gray-700 add-exercise">
                                 <i class="fas fa-plus"></i>
@@ -171,51 +185,57 @@
 
                     <!-- 训练动作列表 -->
                     <div class="exercises-list space-y-2">
-                        <div class="exercise-item flex items-center p-2 border border-gray-200 rounded-md bg-white">
-                            <div class="drag-handle mr-2 text-gray-400">
-                                <i class="fas fa-grip-vertical"></i>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">1</span>
+                                </div>
+                                <span class="text-sm">卧推</span>
                             </div>
-                            <div class="flex-1">
-                                <div class="font-medium">卧推</div>
-                                <div class="text-sm text-gray-500">4组 x 10-12次</div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">4组 × 10-12次</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
-                            <button class="text-gray-500 hover:text-gray-700 edit-exercise">
-                                <i class="fas fa-edit"></i>
-                            </button>
                         </div>
 
-                        <div class="exercise-item flex items-center p-2 border border-gray-200 rounded-md bg-white">
-                            <div class="drag-handle mr-2 text-gray-400">
-                                <i class="fas fa-grip-vertical"></i>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">2</span>
+                                </div>
+                                <span class="text-sm">哑铃飞鸟</span>
                             </div>
-                            <div class="flex-1">
-                                <div class="font-medium">哑铃飞鸟</div>
-                                <div class="text-sm text-gray-500">3组 x 12-15次</div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">3组 × 12-15次</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
-                            <button class="text-gray-500 hover:text-gray-700 edit-exercise">
-                                <i class="fas fa-edit"></i>
-                            </button>
                         </div>
 
-                        <div class="exercise-item flex items-center p-2 border border-gray-200 rounded-md bg-white">
-                            <div class="drag-handle mr-2 text-gray-400">
-                                <i class="fas fa-grip-vertical"></i>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">3</span>
+                                </div>
+                                <span class="text-sm">坐姿推肩</span>
                             </div>
-                            <div class="flex-1">
-                                <div class="font-medium">坐姿推肩</div>
-                                <div class="text-sm text-gray-500">4组 x 8-10次</div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">4组 × 8-10次</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
-                            <button class="text-gray-500 hover:text-gray-700 edit-exercise">
-                                <i class="fas fa-edit"></i>
-                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 周三训练 -->
-                <div class="training-day mb-4 border border-gray-200 rounded-md p-3">
-                    <div class="flex justify-between items-center mb-2">
-                        <h5 class="font-medium">下肢训练</h5>
+                <!-- 下肢训练 -->
+                <div class="bg-white rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-medium">下肢训练</h4>
                         <div class="flex space-x-2">
                             <button class="text-gray-500 hover:text-gray-700 add-exercise">
                                 <i class="fas fa-plus"></i>
@@ -228,38 +248,42 @@
 
                     <!-- 训练动作列表 -->
                     <div class="exercises-list space-y-2">
-                        <div class="exercise-item flex items-center p-2 border border-gray-200 rounded-md bg-white">
-                            <div class="drag-handle mr-2 text-gray-400">
-                                <i class="fas fa-grip-vertical"></i>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">1</span>
+                                </div>
+                                <span class="text-sm">深蹲</span>
                             </div>
-                            <div class="flex-1">
-                                <div class="font-medium">深蹲</div>
-                                <div class="text-sm text-gray-500">4组 x 8-10次</div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">4组 × 8-10次</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
-                            <button class="text-gray-500 hover:text-gray-700 edit-exercise">
-                                <i class="fas fa-edit"></i>
-                            </button>
                         </div>
 
-                        <div class="exercise-item flex items-center p-2 border border-gray-200 rounded-md bg-white">
-                            <div class="drag-handle mr-2 text-gray-400">
-                                <i class="fas fa-grip-vertical"></i>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">2</span>
+                                </div>
+                                <span class="text-sm">腿举</span>
                             </div>
-                            <div class="flex-1">
-                                <div class="font-medium">腿举</div>
-                                <div class="text-sm text-gray-500">3组 x 12-15次</div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">3组 × 12-15次</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
-                            <button class="text-gray-500 hover:text-gray-700 edit-exercise">
-                                <i class="fas fa-edit"></i>
-                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- 周五训练 -->
-                <div class="training-day border border-gray-200 rounded-md p-3">
-                    <div class="flex justify-between items-center mb-2">
-                        <h5 class="font-medium">背部训练</h5>
+                <div class="bg-white rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-medium">背部训练</h4>
                         <div class="flex space-x-2">
                             <button class="text-gray-500 hover:text-gray-700 add-exercise">
                                 <i class="fas fa-plus"></i>
@@ -272,30 +296,34 @@
 
                     <!-- 训练动作列表 -->
                     <div class="exercises-list space-y-2">
-                        <div class="exercise-item flex items-center p-2 border border-gray-200 rounded-md bg-white">
-                            <div class="drag-handle mr-2 text-gray-400">
-                                <i class="fas fa-grip-vertical"></i>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">1</span>
+                                </div>
+                                <span class="text-sm">引体向上</span>
                             </div>
-                            <div class="flex-1">
-                                <div class="font-medium">引体向上</div>
-                                <div class="text-sm text-gray-500">4组 x 最大次数</div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">4组 × 最大次数</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
-                            <button class="text-gray-500 hover:text-gray-700 edit-exercise">
-                                <i class="fas fa-edit"></i>
-                            </button>
                         </div>
 
-                        <div class="exercise-item flex items-center p-2 border border-gray-200 rounded-md bg-white">
-                            <div class="drag-handle mr-2 text-gray-400">
-                                <i class="fas fa-grip-vertical"></i>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">2</span>
+                                </div>
+                                <span class="text-sm">坐姿划船</span>
                             </div>
-                            <div class="flex-1">
-                                <div class="font-medium">坐姿划船</div>
-                                <div class="text-sm text-gray-500">3组 x 10-12次</div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">3组 × 10-12次</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </div>
-                            <button class="text-gray-500 hover:text-gray-700 edit-exercise">
-                                <i class="fas fa-edit"></i>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -324,8 +352,8 @@
                 </div>
                 
                 <div class="mb-4">
-                    <label for="exercise-notes" class="block text-sm font-medium text-gray-700 mb-1">备注</label>
-                    <textarea id="exercise-notes" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="可选：动作要点、重量建议等"></textarea>
+                    <label for="exercise-notes" class="block text-sm font-medium text-gray-700 mb-1">注意要点</label>
+                    <textarea id="exercise-notes" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="如：收紧核心肌群、保持肩膀稳定等要点"></textarea>
                 </div>
                 
                 <div class="flex justify-end space-x-3">
@@ -334,62 +362,290 @@
                 </div>
             </div>
         </div>
+
+        <!-- 课程编辑模态框 -->
+        <div id="course-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-lg p-6 w-11/12 max-w-md">
+                <h3 class="text-lg font-bold mb-4">添加训练课程</h3>
+                
+                <div class="mb-4">
+                    <label for="course-name" class="block text-sm font-medium text-gray-700 mb-1">课程名称</label>
+                    <input type="text" id="course-name" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="例如：上肢训练、全身拉伸等">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="course-description" class="block text-sm font-medium text-gray-700 mb-1">课程描述（可选）</label>
+                    <textarea id="course-description" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="简要描述该训练课程的重点、目标等"></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button id="cancel-course" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">取消</button>
+                    <button id="save-course" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">保存</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
         // 模态框操作
-        const modal = document.getElementById('exercise-modal');
-        const editButtons = document.querySelectorAll('.edit-exercise');
-        const addButtons = document.querySelectorAll('.add-exercise');
-        const cancelButton = document.getElementById('cancel-exercise');
-        const saveButton = document.getElementById('save-exercise');
+        const exerciseModal = document.getElementById('exercise-modal');
+        const courseModal = document.getElementById('course-modal');
+        const cancelExerciseButton = document.getElementById('cancel-exercise');
+        const saveExerciseButton = document.getElementById('save-exercise');
+        const cancelCourseButton = document.getElementById('cancel-course');
+        const saveCourseButton = document.getElementById('save-course');
         
-        // 打开编辑动作模态框
-        editButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const exerciseItem = button.closest('.exercise-item');
-                const exerciseName = exerciseItem.querySelector('.font-medium').textContent;
-                const exerciseReps = exerciseItem.querySelector('.text-sm').textContent;
-                
-                // 解析组数和次数
-                const setsReps = exerciseReps.split('x');
-                const sets = parseInt(setsReps[0]);
-                const reps = setsReps[1].trim();
-                
-                // 填充表单
-                document.getElementById('exercise-name').value = exerciseName;
-                document.getElementById('exercise-sets').value = sets;
-                document.getElementById('exercise-reps').value = reps;
-                
-                // 显示模态框
-                modal.classList.remove('hidden');
-            });
+        // 绑定编辑按钮事件（使用事件委托）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 重新绑定所有事件
+            rebindEvents();
         });
         
-        // 打开添加动作模态框
-        addButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // 重置表单
-                document.getElementById('exercise-name').value = '';
-                document.getElementById('exercise-sets').value = 3;
-                document.getElementById('exercise-reps').value = '10-12';
-                document.getElementById('exercise-notes').value = '';
-                
-                // 显示模态框
-                modal.classList.remove('hidden');
+        // 统一绑定事件的函数
+        function rebindEvents() {
+            // 为所有编辑按钮添加点击事件
+            document.querySelectorAll('.edit-exercise').forEach(button => {
+                button.removeEventListener('click', handleEditExercise);
+                button.addEventListener('click', handleEditExercise);
             });
+            
+            // 添加动作按钮
+            document.querySelectorAll('.add-exercise').forEach(button => {
+                button.removeEventListener('click', handleAddExercise);
+                button.addEventListener('click', handleAddExercise);
+            });
+            
+            // 删除课程按钮
+            document.querySelectorAll('.week-container .fa-trash').forEach(icon => {
+                const button = icon.closest('button');
+                button.removeEventListener('click', handleDeleteCourse);
+                button.addEventListener('click', handleDeleteCourse);
+            });
+        }
+        
+        // 处理添加动作的函数
+        function handleAddExercise() {
+            // 重置表单
+            document.getElementById('exercise-name').value = '';
+            document.getElementById('exercise-sets').value = 3;
+            document.getElementById('exercise-reps').value = '10-12';
+            document.getElementById('exercise-notes').value = '';
+            
+            // 保存当前操作的课程，用于后续保存
+            this.setAttribute('data-current-action', 'add');
+            saveExerciseButton.setAttribute('data-target-course', this.closest('.bg-white.rounded-lg').querySelector('h4').textContent);
+            
+            // 显示模态框
+            exerciseModal.classList.remove('hidden');
+        }
+        
+        // 处理编辑动作的函数
+        function handleEditExercise() {
+            let exerciseName, exerciseSets, exerciseReps, exerciseNotes;
+            
+            // 检查是新样式还是旧样式
+            const parentOldStyle = this.closest('.exercise-item');
+            
+            if (parentOldStyle) {
+                // 旧样式结构
+                exerciseName = parentOldStyle.querySelector('.font-medium').textContent;
+                const repsText = parentOldStyle.querySelector('.text-sm').textContent;
+                const setsReps = repsText.split('x');
+                exerciseSets = parseInt(setsReps[0]);
+                exerciseReps = setsReps[1].trim();
+                // 注意要点在旧样式中不存在，设为空字符串
+                exerciseNotes = "";
+            } else {
+                // 新样式结构
+                const parent = this.closest('.flex.items-center.justify-between');
+                exerciseName = parent.querySelector('.flex.items-center span.text-sm').textContent;
+                const repsText = parent.querySelector('.flex.items-center.space-x-3 span.text-xs').textContent;
+                const setsReps = repsText.split('×');
+                exerciseSets = parseInt(setsReps[0]);
+                exerciseReps = setsReps[1].trim();
+                
+                // 尝试获取注意要点（可能不存在）
+                const notesElement = parent.querySelector('.exercise-notes');
+                exerciseNotes = notesElement ? notesElement.textContent : "";
+            }
+            
+            // 填充表单
+            document.getElementById('exercise-name').value = exerciseName;
+            document.getElementById('exercise-sets').value = exerciseSets;
+            document.getElementById('exercise-reps').value = exerciseReps;
+            document.getElementById('exercise-notes').value = exerciseNotes;
+            
+            // 保存当前操作的动作，用于后续保存
+            saveExerciseButton.setAttribute('data-current-action', 'edit');
+            saveExerciseButton.setAttribute('data-original-name', exerciseName);
+            saveExerciseButton.setAttribute('data-target-course', this.closest('.bg-white.rounded-lg').querySelector('h4').textContent);
+            
+            // 显示模态框
+            exerciseModal.classList.remove('hidden');
+        }
+        
+        // 处理删除课程的函数
+        function handleDeleteCourse() {
+            const courseCard = this.closest('.bg-white.rounded-lg');
+            const courseName = courseCard.querySelector('h4').textContent;
+            
+            if (confirm(`确定要删除"${courseName}"课程吗？`)) {
+                courseCard.remove();
+            }
+        }
+        
+        // 关闭动作模态框
+        cancelExerciseButton.addEventListener('click', () => {
+            exerciseModal.classList.add('hidden');
         });
         
-        // 关闭模态框
-        cancelButton.addEventListener('click', () => {
-            modal.classList.add('hidden');
+        // 关闭课程模态框
+        cancelCourseButton.addEventListener('click', () => {
+            courseModal.classList.add('hidden');
         });
         
         // 保存动作
-        saveButton.addEventListener('click', () => {
-            // 这里可以添加保存逻辑
-            alert('动作已保存！');
-            modal.classList.add('hidden');
+        saveExerciseButton.addEventListener('click', () => {
+            const exerciseName = document.getElementById('exercise-name').value.trim();
+            const exerciseSets = document.getElementById('exercise-sets').value;
+            const exerciseReps = document.getElementById('exercise-reps').value.trim();
+            const exerciseNotes = document.getElementById('exercise-notes').value.trim();
+            
+            if (!exerciseName) {
+                alert('请输入动作名称');
+                return;
+            }
+            
+            if (!exerciseSets || !exerciseReps) {
+                alert('请输入组数和次数');
+                return;
+            }
+            
+            const currentAction = saveExerciseButton.getAttribute('data-current-action');
+            const targetCourse = saveExerciseButton.getAttribute('data-target-course');
+            
+            // 查找目标课程
+            const courseCards = document.querySelectorAll('.bg-white.rounded-lg');
+            let targetCourseCard;
+            
+            for (const card of courseCards) {
+                if (card.querySelector('h4').textContent === targetCourse) {
+                    targetCourseCard = card;
+                    break;
+                }
+            }
+            
+            if (targetCourseCard) {
+                const exercisesList = targetCourseCard.querySelector('.exercises-list');
+                const existingExercises = exercisesList.querySelectorAll('.flex.items-center.justify-between');
+                
+                if (currentAction === 'edit') {
+                    // 编辑现有动作
+                    const originalName = saveExerciseButton.getAttribute('data-original-name');
+                    
+                    for (const exercise of existingExercises) {
+                        const nameElement = exercise.querySelector('.flex.items-center span.text-sm');
+                        
+                        if (nameElement && nameElement.textContent === originalName) {
+                            // 更新动作信息
+                            nameElement.textContent = exerciseName;
+                            const repsElement = exercise.querySelector('.flex.items-center.space-x-3 span.text-xs');
+                            if (repsElement) {
+                                repsElement.textContent = `${exerciseSets}组 × ${exerciseReps}次`;
+                            }
+                            
+                            // 更新或添加注意要点
+                            let notesElement = exercise.querySelector('.exercise-notes');
+                            if (exerciseNotes) {
+                                if (notesElement) {
+                                    notesElement.textContent = exerciseNotes;
+                                } else {
+                                    // 添加注意要点元素
+                                    exercise.insertAdjacentHTML('beforeend', `<div class="exercise-notes text-xs text-gray-500 mt-1 ml-8 hidden">${exerciseNotes}</div>`);
+                                }
+                            }
+                            break;
+                        }
+                    }
+                } else {
+                    // 添加新动作
+                    const nextNumber = existingExercises.length + 1;
+                    
+                    // 构建基本动作HTML
+                    let newExerciseHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                    <span class="text-xs font-bold text-green-600">${nextNumber}</span>
+                                </div>
+                                <span class="text-sm">${exerciseName}</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-500">${exerciseSets}组 × ${exerciseReps}次</span>
+                                <button class="text-gray-500 hover:text-gray-700 edit-exercise">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // 添加到列表
+                    exercisesList.insertAdjacentHTML('beforeend', newExerciseHTML);
+                    
+                    // 如果有注意要点，则添加
+                    if (exerciseNotes) {
+                        const newExerciseElement = exercisesList.lastElementChild;
+                        newExerciseElement.insertAdjacentHTML('beforeend', `<div class="exercise-notes text-xs text-gray-500 mt-1 ml-8">${exerciseNotes}</div>`);
+                    }
+                    
+                    // 重新绑定事件
+                    rebindEvents();
+                }
+            }
+            
+            exerciseModal.classList.add('hidden');
+        });
+        
+        // 保存课程
+        saveCourseButton.addEventListener('click', () => {
+            const courseName = document.getElementById('course-name').value.trim();
+            const courseDescription = document.getElementById('course-description').value.trim();
+            
+            if (!courseName) {
+                alert('请输入课程名称');
+                return;
+            }
+            
+            // 创建新课程HTML
+            const newCourseHTML = `
+                <div class="bg-white rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-medium">${courseName}</h4>
+                        <div class="flex space-x-2">
+                            <button class="text-gray-500 hover:text-gray-700 add-exercise">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 训练动作列表 -->
+                    <div class="exercises-list space-y-2">
+                        <!-- 新课程默认没有动作，可以通过"添加动作"按钮添加 -->
+                    </div>
+                </div>
+            `;
+            
+            // 添加到界面
+            document.querySelector('.week-container').insertAdjacentHTML('beforeend', newCourseHTML);
+            
+            // 重新绑定事件
+            rebindEvents();
+            
+            // 关闭模态框
+            courseModal.classList.add('hidden');
         });
         
         // 保存整个训练计划
@@ -400,7 +656,8 @@
         
         // 添加课程
         document.getElementById('add-week').addEventListener('click', () => {
-            alert('功能开发中...');
+            // 显示课程编辑模态框
+            courseModal.classList.remove('hidden');
         });
     </script>
 </body>

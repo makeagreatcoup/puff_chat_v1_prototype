@@ -106,8 +106,8 @@
                     </label>
                     <input type="file" id="avatar-upload" class="hidden" accept="image/*">
                 </div>
-                <div class="avatar-preview">
-                    <img src="https://randomuser.me/api/portraits/men/31.jpg" alt="用户头像">
+                <div class="avatar-preview bg-indigo-100 flex items-center justify-center">
+                    <i class="fas fa-user text-indigo-500 text-4xl"></i>
                 </div>
             </div>
         </section>
@@ -120,26 +120,6 @@
                 <label for="nickname" class="block text-sm font-medium text-gray-700 mb-1">昵称</label>
                 <input type="text" id="nickname" name="nickname" value="健身达人" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
-            
-            <div class="mb-4">
-                <label for="gender" class="block text-sm font-medium text-gray-700 mb-1">性别</label>
-                <div class="flex space-x-3">
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="gender" value="male" class="form-radio h-4 w-4 text-indigo-600" checked>
-                        <span class="ml-2">男</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="gender" value="female" class="form-radio h-4 w-4 text-indigo-600">
-                        <span class="ml-2">女</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="gender" value="other" class="form-radio h-4 w-4 text-indigo-600">
-                        <span class="ml-2">其他</span>
-                    </label>
-                </div>
-            </div>
-            
-
             
             <div>
                 <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">个人简介</label>
@@ -164,7 +144,13 @@
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.querySelector('.avatar-preview img').src = e.target.result;
+                    // 替换默认图标为上传的图片
+                    const previewDiv = document.querySelector('.avatar-preview');
+                    previewDiv.innerHTML = ''; // 清除图标
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = '用户头像';
+                    previewDiv.appendChild(img);
                 }
                 reader.readAsDataURL(file);
             }
